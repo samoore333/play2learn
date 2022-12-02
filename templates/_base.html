@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/2554e7175e.js" crossorigin="anonymous"></script>
+<title>{% block title %}{% endblock %} | Play2Learn</title>
+</head>
+<body>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-.5">
+          <a href="home.html">
+          <img src="Images/images.png"
+          alt="Play2Learn Home" height="60" width="60">
+          </a>
+        </div>
+        <div class="col-sm-11.5">
+          <h1>Play2Learn</h1>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-info navbar-dark">
+      <button class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar-content">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-content">
+        <ul class="navbar-nav justify-content-between w-100">
+          <li class="nav-item active">
+            <a class="nav-link" href="home.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+            id="navbardrop" data-toggle="dropdown">Games
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="index.html">Anagram Hunt</a>
+                <a class="dropdown-item" href="math-facts.html">Math Facts Practice</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+<main class="m-4 pb-5">
+  {% block main %}<h2>Welcome!</h2>{% endblock %}
+</main>
+<footer class="navbar fixed-bottom bg-info">
+  <div class="d-flex justify-content-start">
+    <p class="text-white pt-2">&copy; 2020 Play2Learn</p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <a class="pr-1" href="contact-us.html">
+      <i class='fa-solid fa-envelope'
+      style='font-size:32px;color:white'></i></a>
+    <a class="pr-1" href="https://www.instagram.com/webucator" target="newtab">
+      <i class='fa-brands fa-instagram' 
+      style='font-size:32px;color:white'></i></a>
+    <a class="pr-1" href="https://www.facebook.com/webucator" target="newtab">
+      <i class='fab fa-facebook' 
+      style='font-size:32px;color:white'></i></a>
+    <a class="pr-1" href="https://twitter.com/webucator" target="newtab">
+      <i class='fab fa-twitter'
+      style='font-size:32px;color:white'></i></a>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+</body>
+</html>
