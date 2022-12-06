@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'anagram.apps.AnagramConfig',
     'mathgame.apps.MathgameConfig',
     'pages.apps.PagesConfig',
+    'reviews.apps.ReviewsConfig',
 ]
 
 MIDDLEWARE = [
