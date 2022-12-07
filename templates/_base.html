@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,48 +6,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/2554e7175e.js" crossorigin="anonymous"></script>
+<link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 <title>{% block title %}{% endblock %} | Play2Learn</title>
 </head>
 <body>
   <header>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-.5">
-          <a href="{% url 'pages:homepage' %}">
-          <img src="Images/images.png"
-          alt="Play2Learn Home" height="60" width="60">
-          </a>
-        </div>
-        <div class="col-sm-11.5">
-          <h1>Play2Learn</h1>
-        </div>
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-lg bg-info navbar-dark">
-      <button class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar-content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <a class="navbar-brand" href="{% url 'pages:homepage' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="img-fluid"/>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent" aria-expanded="false"
+        aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar-content">
-        <ul class="navbar-nav justify-content-between w-100">
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'pages:homepage' %}">Home</a></li>
+            <a class="nav-link" href="{% url 'pages:homepage' %}">Home 
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#"
             id="navbardrop" data-toggle="dropdown">Games
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="index.html">Anagram Hunt</a>
-                <a class="dropdown-item" href="math-facts.html">Math Facts Practice</a>
+                <a class="dropdown-item" href="anagram_hunt.html">Anagram Hunt</a>
+                <a class="dropdown-item" href="math_Facts.html">Math Facts Practice</a>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'pages:about-us' %}">About</a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a></li>
+          {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
+            </li>
+          {% else %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Me
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
+                <a class="dropdown-item" href="{% url 'jokes:creator' user.username %}?order={{ order }}&direction={{ direction }}">My Game History</a>
+                <div class="dropdown-divider"></div>
+                <form method="post" action="{% url 'account_logout' %}">
+                  {% csrf_token %}
+                  <button class="btn dropdown-item">Log out</button>
+                </form>
+              </div>
+            </li>
+          {% endif %}
         </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'jokes:list' %}">
+          <input class="form-control mr-sm-2" type="search"
+            placeholder="Search" aria-label="Search" name="q"
+            value="{{ request.GET.q }}">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
       </div>
     </nav>
   </header>
@@ -54,24 +78,26 @@
   {% block main %}<h2>Welcome!</h2>{% endblock %}
   <br>
 </main>
-<footer class="navbar fixed-bottom bg-info">
-  <div class="d-flex justify-content-start">
-    <p class="text-white pt-2">&copy; 2020 Play2Learn</p>
+<footer class="fixed-bottom bg-light row">
+  <div class="col">
+    <div class="float-right m-1 mr-2">Copyright &copy; 2020 Django Jokes.</div>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:about-us' %} ">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:contact-us' %} ">Contact Us</a>
+        </li>
+        {% if user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/">Admin</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
-  <div class="d-flex justify-content-end">
-    <a class="pr-1" href="contact-us.html">
-      <i class='fa-solid fa-envelope'
-      style='font-size:32px;color:white'></i></a>
-    <a class="pr-1" href="https://www.instagram.com/webucator" target="newtab">
-      <i class='fa-brands fa-instagram' 
-      style='font-size:32px;color:white'></i></a>
-    <a class="pr-1" href="https://www.facebook.com/webucator" target="newtab">
-      <i class='fab fa-facebook' 
-      style='font-size:32px;color:white'></i></a>
-    <a class="pr-1" href="https://twitter.com/webucator" target="newtab">
-      <i class='fab fa-twitter'
-      style='font-size:32px;color:white'></i></a>
-  </div>
+</nav>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
