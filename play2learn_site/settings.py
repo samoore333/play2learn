@@ -28,6 +28,7 @@ INSTALLED_APPS = [
 
     # Local apps
     'anagram.apps.AnagramConfig',
+    'contactus.apps.ContactusConfig',
     'mathgame.apps.MathgameConfig',
     'pages.apps.PagesConfig',
     'reviews.apps.ReviewsConfig',
