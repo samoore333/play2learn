@@ -14,7 +14,8 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
       <a class="navbar-brand" href="{% url 'pages:homepage' %}">
-        <img src="{% static 'images/logo.png' %}" alt="Logo" class="img-fluid"/>
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="img-fluid"
+        height="60" width="60"/>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"
         data-target="#navbarSupportedContent" aria-expanded="false"
@@ -30,20 +31,22 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
-            id="navbardrop" data-toggle="dropdown">Games
-            </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="anagram_hunt.html">Anagram Hunt</a>
-                <a class="dropdown-item" href="math_Facts.html">Math Facts Practice</a>
-            </div>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Games
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Anagram Hunt</a>
+                <a class="dropdown-item" href="#">Math Facts Practice</a>
+              </div>
           </li>
           {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
+              <a class="nav-link" href="">Log in</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
+              <a class="nav-link" href="">Sign up</a>
             </li>
           {% else %}
             <li class="nav-item dropdown">
@@ -53,10 +56,10 @@
                 Me
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
-                <a class="dropdown-item" href="{% url 'jokes:creator' user.username %}?order={{ order }}&direction={{ direction }}">My Game History</a>
+                <a class="dropdown-item" href="">My Account</a>
+                <a class="dropdown-item" href="">My Game History</a>
                 <div class="dropdown-divider"></div>
-                <form method="post" action="{% url 'account_logout' %}">
+                <form method="post" action="">
                   {% csrf_token %}
                   <button class="btn dropdown-item">Log out</button>
                 </form>
@@ -64,14 +67,6 @@
             </li>
           {% endif %}
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'jokes:list' %}">
-          <input class="form-control mr-sm-2" type="search"
-            placeholder="Search" aria-label="Search" name="q"
-            value="{{ request.GET.q }}">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </nav>
   </header>
@@ -81,18 +76,18 @@
 </main>
 <footer class="fixed-bottom bg-light row">
   <div class="col">
-    <div class="float-right m-1 mr-2">Copyright &copy; 2020 Django Jokes.</div>
+    <div class="float-right m-1 mr-2">Copyright &copy; 2022 Play2Learn</div>
     <nav>
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:about-us' %} ">About</a>
+          <a class="nav-link text-info" href="{% url 'pages:about-us' %} ">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'pages:contact-us' %} ">Contact Us</a>
+          <a class="nav-link text-info" href="">Contact Us</a>
         </li>
         {% if user.is_staff %}
           <li class="nav-item">
-            <a class="nav-link" href="/admin/">Admin</a>
+            <a class="nav-link text-info" href="/admin/">Admin</a>
           </li>
         {% endif %}
       </ul>
