@@ -2,6 +2,51 @@
 
 {% block title %}Home{% endblock %}
 {% block main %}
-  <h2>Welcome!</h2>
-  <p>Ready to play?</p>
+<div class="container-fluid p-5">
+  <div class="row pl-5">
+    <div class="col-sm-3 pl-5">
+      <h4 class="pl-5">Happy Clients Say&hellip;</h4>
+    </div>
+    <div class="col-sm-9 pt-1 text-warning font-weight-bold font-italic">
+      <div id="myquotes" class="carousel" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <p>"I have never had more fun than I do playing Anagram Hunt.
+              It is the best game ever invented!" -- Justin Jess</p>
+          </div>
+          <div class="carousel-item">
+            <p>"I have learned a lot from these games!" -- Jenny</p>
+          </div>
+          <div class="carousel-item">
+            <p>"Great work, thank you!" -- anonymous</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid p-5">
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Anagram Hunt</h2>
+      <p>This game challenges your ability to guess anagrams based on the 
+        word length you choose. You will be scored by the number of correct answers
+        and you will be given a 60 minute timer to get as many correct answers 
+        in that time frame.  Login is required to play. Good luck and 
+        enjoy the game!</p>
+        <button type="button" class="btn btn-info"><a class="text-white" href="index.html">Play</a></button>
+    </div>
+    <div class="col-sm-6">
+      <h2>Math Facts Practice</h2>
+      <p>It is time to go back to school and check your math skills. This is a fun
+        interactive game that lets you pick the max number length and operator.  There 
+        is a 30 minute timer to get as many correct answers as possible to calculate your 
+        score.  Login is required to play. Have fun!
+      </p>
+        <button type="button" class="btn btn-info"><a class="text-white" href="math-facts.html">Play</a></button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+</body>
 {% endblock %}
