@@ -1,6 +1,6 @@
 from django.db import models
 
-class AnagramScore(models.Model):
+class Anagram(models.Model):
     score = models.IntegerField
     max_number = models.IntegerField
     operation = models.CharField

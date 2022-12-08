@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block title %}Anagram Hunt Leaderboard{% endblock %}
+{% block main %}
+  <h2>Anagram Hunt Leaderboard</h2>
+  <ul class="list-group list-group-flush mb-3">
+    {% for anagram in anagram_list %}
+      <li class="list-group-item">{{ anagram.score }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

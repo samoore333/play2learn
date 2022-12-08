@@ -34,11 +34,22 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
                 role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                Games
+                Anagram Hunt
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Anagram Hunt</a>
-                <a class="dropdown-item" href="#">Math Facts Practice</a>
+                <a class="dropdown-item" href="{% url 'anagram:list' %}">Leaderboard</a>
+                <a class="dropdown-item" href="#">Play Game</a>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Math Facts Practice
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'mathgame:list' %}">Leaderboard</a>
+                <a class="dropdown-item" href="#">Play Game</a>
               </div>
           </li>
           {% if not user.is_authenticated %}

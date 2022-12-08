@@ -1,6 +1,6 @@
 from django.db import models
 
-class MathScore(models.Model):
+class Mathgame(models.Model):
     score = models.IntegerField
     max_number = models.IntegerField
     operation = models.CharField
