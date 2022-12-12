@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 {% block main %}
@@ -24,9 +25,11 @@
     </div>
   </div>
 </div>
-<div class="container-fluid p-5">
+<div class="justify-content-between p-5">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6 p-5">
+      <img src="{% static 'images/anagram.jpg' %}" alt="Anagram Image" 
+      class="img-fluid" height="300px" width="425px">
       <h2>Anagram Hunt</h2>
       <p>This game challenges your ability to guess anagrams based on the 
         word length you choose. You will be scored by the number of correct answers
@@ -34,7 +37,9 @@
         enjoy the game!</p>
         <button type="button" class="btn btn-info"><a class="text-white nounderline" href="">Play</a></button>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6 p-5">
+      <img src="{% static 'images/math.jpg' %}" alt="Math Image" 
+      class="img-fluid" height="300px" width="425px">
       <h2>Math Facts Practice</h2>
       <p>It is time to go back to school and check your math skills. This is a fun
         interactive game that lets you pick the max number length and operator.  There 
