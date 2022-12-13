@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 
-from .models import Anagram
+from .models import Anagramgame
 
 class AnagramListView(ListView):
-    model = Anagram
+    model = Anagramgame

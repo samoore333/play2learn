@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Anagram
+from .models import Anagramgame
 
-@admin.register(Anagram)
+@admin.register(Anagramgame)
 class AnagramAdmin(admin.ModelAdmin):
-    model = Anagram
+    model = Anagramgame
     list_display = ['score', 'max_number', 'operation', 'end_time']
 
     def get_readonly_fields(self, request, obj=None):
