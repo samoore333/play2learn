@@ -94,7 +94,7 @@
           <a class="nav-link text-info" href="{% url 'pages:about-us' %} ">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-info" href="">Contact Us</a>
+          <a class="nav-link text-info" href="{% url 'contactus:app' %}">Contact Us</a>
         </li>
         {% if user.is_staff %}
           <li class="nav-item">
