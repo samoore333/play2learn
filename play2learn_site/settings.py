@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third-party
+    'crispy_forms',
+
     # Local apps
     'anagram.apps.AnagramConfig',
     'contactus.apps.ContactusConfig',
@@ -36,6 +39,8 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'users.apps.UsersConfig',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
