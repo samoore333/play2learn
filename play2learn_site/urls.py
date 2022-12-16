@@ -8,5 +8,5 @@ urlpatterns = [
     path('contactus/', include('contactus.urls')),
     path('mathgame/', include('mathgame.urls')),
     path('', include('pages.urls')),
-    path('reviews/', include('reviews.urls'))
+    path('reviews/', include('reviews.urls')),
 ]
