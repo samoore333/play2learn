@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import Reviews
+from .models import Review
 
-@admin.register(Reviews)
+@admin.register(Review)
 class ReviewsAdmin(admin.ModelAdmin):
-    model = Reviews
+    model = Review
     list_display = ['first_name', 'last_name', 'email', 'comment']
 
     def get_readonly_fields(self, request, obj=None):
