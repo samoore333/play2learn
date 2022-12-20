@@ -54,10 +54,10 @@
           </li>
           {% if not user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="">Log in</a>
+              <a class="nav-link" href="{% url 'account_login' %}">Log in</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Sign up</a>
+              <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
             </li>
           {% else %}
             <li class="nav-item dropdown">
@@ -71,7 +71,7 @@
                 <a class="dropdown-item" href="">My Game History</a>
                 <a class="dropdown-item" href="{% url 'reviews:app' %}">Leave A Review</a>
                 <div class="dropdown-divider"></div>
-                <form method="post" action="">
+                <form method="post" action="{% url 'account_logout' %}">
                   {% csrf_token %}
                   <button class="btn dropdown-item">Log out</button>
                 </form>
