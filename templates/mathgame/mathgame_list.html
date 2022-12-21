@@ -5,7 +5,7 @@
   <h2>Math Facts Leaderboard</h2>
   <ul class="list-group list-group-flush mb-3">
     {% for mathgame in mathgame_list %}
-      <li class="list-group-item">{{ mathgame.score }}</li>
+      <li class="list-group-item">{{ mathgame.score }} by {{mathgame.user.username}}</li>
     {% endfor %}
   </ul>
 {% endblock %}
