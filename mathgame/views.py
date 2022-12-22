@@ -5,6 +5,7 @@ from .models import Mathgame
 
 class MathgameListView(LoginRequiredMixin, ListView):
     model = Mathgame
+    paginate_by = 10
 
     def form_valid(self, form):
         form.instance.user = self.request.user

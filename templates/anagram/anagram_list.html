@@ -8,4 +8,5 @@
       <li class="list-group-item">{{ anagram.score }} by {{anagram.user.username}}</li>
     {% endfor %}
   </ul>
+  {% include 'includes/pagination.html' %}
 {% endblock %}
