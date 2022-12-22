@@ -65,8 +65,10 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
                 role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <img src="{{ user.avatar.url }}" alt="Avatar"
+                {% if user.avatar and not form.avatar.errors %}
+                 <img src="{{ user.avatar.url }}" alt="Avatar"
                   class="rounded-circle" width="25" height="25">
+                {% endif %}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{% url 'my-account' %}">My Account</a>
