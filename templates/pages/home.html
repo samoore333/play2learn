@@ -35,9 +35,11 @@
         word length you choose. You will be scored by the number of correct answers
         and you will be given a 60 minute timer to get as many correct answers. <strong>Login is required to play</strong>. Good luck and 
         enjoy the game!</p>
-      {% if not user.is_authenticated %}
-        <button type="button" class="btn btn-info"><a class="text-white nounderline" href="">Play</a></button>
-      {% else %}
+        {% if not user.is_authenticated %}
+          <button type="button" class="btn btn-info"><a class="text-white nounderline" href="{% url 'account_login' %}">Login</a></button>
+        {% else %}
+          <button type="button" class="btn btn-info"><a class="text-white nounderline" href="">Play</a></button>
+        {% endif %}
     </div>
     <div class="col-sm-6 p-5">
       <img src="{% static 'images/math.jpg' %}" alt="Math Image" 
@@ -48,9 +50,11 @@
         is a 30 minute timer to get as many correct answers as possible to calculate your 
         score.  <strong>Login is required to play</strong>. Have fun!
       </p>
-      {% if not user.is_authenticated %}
-        <button type="button" class="btn btn-info"><a class="text-white nounderline" href="">Play</a></button>
-      {% else %}
+        {% if not user.is_authenticated %}
+          <button type="button" class="btn btn-info"><a class="text-white nounderline" href="{% url 'account_login' %}">Login</a></button>
+        {% else %}
+          <button type="button" class="btn btn-info"><a class="text-white nounderline" href="">Play</a></button>
+        {% endif %}
     </div>
   </div>
 </div>
