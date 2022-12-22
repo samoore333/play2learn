@@ -1,8 +1,9 @@
 from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Mathgame
 
-class MathgameListView(ListView):
+class MathgameListView(LoginRequiredMixin, ListView):
     model = Mathgame
 
     def form_valid(self, form):
