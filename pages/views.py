@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import TemplateView
 
 class HomePageView(TemplateView):
