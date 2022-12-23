@@ -47,7 +47,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'anagram:list' %}">Leaderboard</a>
-                  <a class="dropdown-item" href="#">Play Game</a>
+                  <a class="dropdown-item" href="{% url 'anagram:anagram-hunt' %}">Play Game</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -58,7 +58,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{% url 'mathgame:list' %}">Leaderboard</a>
-                  <a class="dropdown-item" href="#">Play Game</a>
+                  <a class="dropdown-item" href="">Play Game</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -109,7 +109,7 @@
     <nav>
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link text-info" href="{% url 'pages:about-us' %} ">About</a>
+          <a class="nav-link text-info" href="{% url 'pages:about-us' %}">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-info" href="{% url 'contactus:app' %}">Contact Us</a>
