@@ -68,6 +68,9 @@
                 {% if user.avatar and not form.avatar.errors %}
                  <img src="{{ user.avatar.url }}" alt="Avatar"
                   class="rounded-circle" width="25" height="25">
+                {% else %}
+                  <img src="{% static 'images/profile.png' %}" alt="Default Avatar"
+                  class="rounded-circle" width="25" height="25">
                 {% endif %}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
