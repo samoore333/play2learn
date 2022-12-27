@@ -2,7 +2,7 @@ from django.views.generic import CreateView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Mathgame
-from .forms import MathgameForm, MathgamePlay, MathgameScore
+from .forms import MathgameForm, MathgamePlay
 
 class MathgameStartView(CreateView):
     model = Mathgame
@@ -11,10 +11,6 @@ class MathgameStartView(CreateView):
 class MathgamePlayView(UpdateView):
     model = Mathgame
     form_class = MathgamePlay
-
-class MathgameScoreView(UpdateView):
-    model = Mathgame
-    form_class = MathgameScore
 
 class MathgameListView(LoginRequiredMixin, ListView):
     model = Mathgame
