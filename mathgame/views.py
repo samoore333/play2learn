@@ -3,14 +3,19 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Mathgame
+from .forms import MathgameForm, MathgamePlay, MathgameScore
 
-class MathgameCreateView(CreateView):
+class MathgameStartView(CreateView):
     model = Mathgame
-    fields = ['operation', 'max_number']
+    form_class = MathgameForm
 
-class MathgameUpdateView(UpdateView):
+class MathgamePlayView(UpdateView):
     model = Mathgame
-    fields = ['answer', 'end_time', 'score']
+    form_class = MathgamePlay
+
+class MathgameScoreView(UpdateView):
+    model = Mathgame
+    form_class = MathgameScore
 
 class MathgameListView(LoginRequiredMixin, ListView):
     model = Mathgame
