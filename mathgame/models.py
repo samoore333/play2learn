@@ -9,16 +9,17 @@ class Mathgame(models.Model):
     MULTIPLICATION = '*'
     DIVISION = '/'
     OPERATION_CHOICES = [
-        (ADDITION, '+'),
-        (SUBTRACTION, '-'),
-        (MULTIPLICATION, 'x'),
-        (DIVISION, '/'),
+        (ADDITION, 'Addition'),
+        (SUBTRACTION, 'Subtraction'),
+        (MULTIPLICATION, 'Multiplication'),
+        (DIVISION, 'Division'),
     ]
-    score = models.IntegerField()
-    max_number = models.IntegerField()
     operation = models.CharField(max_length=1, choices=OPERATION_CHOICES,
-    default=ADDITION)
+        default=ADDITION)
+    max_number = models.IntegerField(default=10)
+    answer = models.IntegerField(blank=True)
     end_time = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField()
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT
     )
