@@ -2,15 +2,16 @@
 
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
-  <div class="card border-info m-auto mb-3 p-3"
+  <div id="start" class="card border-info m-auto mb-3 p-3"
     style="max-width: 30rem">
+    <h1 class="text-center">Math Facts Practice</h1>
+    <br>
     <form method="post">
       {% csrf_token %}
-      <table class="table">
-        {{ form.as_table }}
-      </table>
+        <p class="font-weight-bold">Select Operation: {{ form.operation }}</p>
+        <p class="font-weight-bold">Enter Max Number: {{ form.max_number }}</p>
     </form>
-    <a class="btn btn-info" href="{% url 'mathgame:start' %}">Go</a>
+    <a class="btn btn-info" href="">Go</a>
     <br>
     <ol>
         <li>Select operation.</li>
