@@ -9,6 +9,6 @@ class MathgameAdmin(admin.ModelAdmin):
 
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
-            return ('score', 'max_number', 'operation', 'end_time')
+            return ('score', 'max_number', 'operation', 'end_time', 'slug')
 
         return ()
