@@ -24,5 +24,8 @@ class Mathgame(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT
     )
 
+    def get_absolute_url(self):
+        return reverse('jokes:detail', args=[str(self.pk)])
+
     def __str__(self):
         return self.operation, self.max_number, self.end_time, self.score

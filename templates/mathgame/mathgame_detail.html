@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+
+{% block title %}Math Facts Practice{% endblock %}
+{% block main %}
+  <div class="card border-primary m-auto mb-3 text-center"
+    style="max-width: 30rem">
+    <h1>Math Facts Practice</h1>
+    <div class="card-header">{{ mathgame.operation }}</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Max Number: {{ mathgame.max_number }}</h5>
+    </div>
+    <div class="card-footer">
+      <h1 class="font-weight-bold">Your final score: {{ mathgame.score }}</h1>
+      <small class="text-muted">
+        Date: {{ mathgame.end_time }}
+        User: {{ mathgame.user }}
+      </small>
+    </div>
+    <a class="btn btn-info" href="">Play Again</a>
+  </div>
+{% endblock %}

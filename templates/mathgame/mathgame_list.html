@@ -5,7 +5,10 @@
   <h2>Math Facts Leaderboard</h2>
   <ul class="list-group list-group-flush mb-3">
     {% for mathgame in mathgame_list %}
-      <li class="list-group-item">{{ mathgame.score }} by {{mathgame.user.username}}</li>
+      <li class="list-group-item">
+        <a href="{{ mathgame.get_absolute_url }}">
+          {{ mathgame.score }} by {{mathgame.user.username}}</a>  
+      </li>
     {% endfor %}
   </ul>
   {% include 'includes/pagination.html' %}

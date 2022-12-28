@@ -1,11 +1,12 @@
 from django.urls import path
 
 from .views import (
-    MathgameListView, MathgameStartView
+    MathgameDetailView, MathgameListView, MathgameStartView
 )
 
 app_name = 'mathgame'
 urlpatterns = [
-    path('start', MathgameStartView.as_view(), name='start'),
-    path('leaderboard', MathgameListView.as_view(), name='leaders'),   
+    path('mathgame/<int:pk>/', MathgameDetailView.as_view(), name='detail'),
+    path('leaderboard', MathgameListView.as_view(), name='leaders'),
+    path('start', MathgameStartView.as_view(), name='start'),  
 ]
