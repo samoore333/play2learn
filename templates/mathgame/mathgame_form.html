@@ -8,10 +8,9 @@
     <br>
     <form method="post">
       {% csrf_token %}
-        <p class="font-weight-bold">Select Operation: {{ form.operation }}</p>
-        <p class="font-weight-bold">Enter Max Number: {{ form.max_number }}</p>
+      {{ form.as_table }}
+      <button class="btn btn-info">Go</button>  
     </form>
-    <a class="btn btn-info" href="">Go</a>
     <br>
     <ol>
         <li>Select operation.</li>
