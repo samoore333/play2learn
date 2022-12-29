@@ -6,7 +6,7 @@ from .forms import MathgameForm
 
 class MathgameCreateView(CreateView):
     model = Mathgame
-    fields = ['operation', 'max_number']
+    form_class = MathgameForm
 
 class MathgameDetailView(DetailView):
     model = Mathgame
@@ -23,4 +23,4 @@ class MathgameListView(LoginRequiredMixin, ListView):
 
 class MathgameUpdateView(UpdateView):
     model = Mathgame
-    fields = ['operation', 'score', 'end_time']
+    form_class = MathgameForm
