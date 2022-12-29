@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
@@ -8,8 +9,8 @@
     <br>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_table }}
-      <button class="btn btn-info">Go</button>  
+      {{ form|crispy }}
+      <a class="btn btn-info btn-block" href="">Go</a>  
     </form>
     <br>
     <ol>

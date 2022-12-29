@@ -5,7 +5,7 @@ from .models import Mathgame
 class MathgameForm(ModelForm):
     class Meta:
         model = Mathgame
-        fields = ['operation', 'max_number', 'answer', 'score']
+        fields = ['operation', 'max_number']
         widgets = {
             'operation': Select(
                 attrs={'autofocus': True, 
@@ -14,9 +14,6 @@ class MathgameForm(ModelForm):
             ),
             'max_number': NumberInput(
                 attrs={'min': 1, 'max': 100}
-            ),
-            'answer': NumberInput(
-                attrs={'autofocus': True}
             )
         }
         help_texts = {
