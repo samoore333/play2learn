@@ -1,12 +1,18 @@
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Mathgame
-from .forms import MathgameForm
+from .forms import MathgameForm, MathgamePlayForm
 
 class MathgameCreateView(CreateView):
     model = Mathgame
     form_class = MathgameForm
+    success_url = reverse_lazy('mathgame:play')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class MathgameDetailView(DetailView):
     model = Mathgame
@@ -17,10 +23,6 @@ class MathgameListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     ordering = ['score']
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
 class MathgameUpdateView(UpdateView):
     model = Mathgame
-    form_class = MathgameForm
+    form_class = MathgamePlayForm

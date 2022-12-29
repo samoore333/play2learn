@@ -16,21 +16,23 @@ class Mathgame(models.Model):
         (MULTIPLICATION, 'Multiplication'),
         (DIVISION, 'Division'),
     ]
+    category = models.CharField(max_length=50, default='Math Facts Practice')
     operation = models.CharField(max_length=1, choices=OPERATION_CHOICES,
         default=ADDITION)
     max_number = models.IntegerField(default=10)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT,
+    )
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
-    answer = models.IntegerField(blank=True)
-    end_time = models.DateTimeField(blank=True, auto_now_add=True)
-    score = models.IntegerField(blank=True)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT
-    )
+    answer = models.IntegerField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+    score = models.IntegerField(blank=True, null=True)
+
 
     def get_absolute_url(self):
-        return reverse('jokes:detail', args=[str(self.pk)])
+        return reverse('mathgame:detail', args=[str(self.pk)])
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -40,4 +42,4 @@ class Mathgame(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.operation, self.max_number, self.end_time, self.score
+        return self.operation
