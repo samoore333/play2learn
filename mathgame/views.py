@@ -8,7 +8,6 @@ from .forms import MathgameForm, MathgamePlayForm
 class MathgameCreateView(CreateView):
     model = Mathgame
     form_class = MathgameForm
-    success_url = reverse_lazy('mathgame:play')
 
     def form_valid(self, form):
         form.instance.user = self.request.user

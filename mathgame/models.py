@@ -17,7 +17,7 @@ class Mathgame(models.Model):
         (DIVISION, 'Division'),
     ]
     category = models.CharField(max_length=50, default='Math Facts Practice')
-    operation = models.CharField(max_length=1, choices=OPERATION_CHOICES,
+    operation = models.CharField(max_length=20, choices=OPERATION_CHOICES,
         default=ADDITION)
     max_number = models.IntegerField(default=10)
     user = models.ForeignKey(
@@ -32,7 +32,7 @@ class Mathgame(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('mathgame:detail', args=[str(self.pk)])
+        return reverse('mathgame:play', args=[self.slug])
 
     def save(self, *args, **kwargs):
         if not self.slug:

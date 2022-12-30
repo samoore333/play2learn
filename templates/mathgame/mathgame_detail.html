@@ -2,15 +2,17 @@
 
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
-  <div class="card border-primary m-auto mb-3 text-center"
+  <div class="card border-info m-auto mb-3 text-center"
     style="max-width: 30rem">
     <h1>Math Facts Practice</h1>
-    <div class="card-header">{{ mathgame.operation }}</div>
+    <div class="card-header font-weight-bold">{{ mathgame.get_operation_display }}</div>
     <div class="card-body text-primary">
-      <h5 class="card-title">Max Number: {{ mathgame.max_number }}</h5>
+      <h5 class="card-title text-warning font-weight-bold">Times Up!</h5>
     </div>
     <div class="card-footer">
-      <h1 class="font-weight-bold">Your final score: {{ mathgame.score }}</h1>
+      <h1>Your final score is:</h1>
+      <h1 class="font-weight-bolder">{{ mathgame.score }}</h1>
+      <br>
       <small class="text-muted">
         Date: {{ mathgame.end_time }}
         User: {{ mathgame.user.username }}
