@@ -7,13 +7,46 @@
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
     {% if 'play' in request.path %}
-    <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
+      <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
+      <br>
+      <h1 class="text-center">5+3</h1>
     {% endif %}
-    <br>
     <form method="post" action="">
       {% csrf_token %}
       {{ form|crispy }}
-      
+    {% if 'play' in request.path %}
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <input class="btn btn-info pl-3 pr-3" type="button" value="1" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="2" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="3" onclick="input(this);" />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <input class="btn btn-info pl-3 pr-3" type="button" value="4" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="5" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="6" onclick="input(this);" />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <input class="btn btn-info pl-3 pr-3" type="button" value="7" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="8" onclick="input(this);" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="9" onclick="input(this);" />
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="form-group">
+          <input class="btn btn-info pl-3 pr-3" type="button" value="0" onclick="input(this)" />
+          <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
+        </div>
+      </div>
+      <div class="justify-content-center">
+        <p class="float-left pl-5">Score: {{ mathgame.score }}</p>
+        <p class="float-right pr-5">Time Left: </p>
+      </div>
+      {% endif %}
       {% if 'start' in request.path %}
       <button class="btn btn-info btn-block">Go</button>
     </form>

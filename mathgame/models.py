@@ -28,7 +28,7 @@ class Mathgame(models.Model):
     )
     answer = models.IntegerField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True, auto_now_add=True)
-    score = models.IntegerField(blank=True, null=True)
+    score = models.IntegerField(blank=True, null=True, default=0)
 
 
     def get_absolute_url(self):
