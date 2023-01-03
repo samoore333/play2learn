@@ -15,6 +15,22 @@
       {% csrf_token %}
       {{ form|crispy }}
     {% if 'play' in request.path %}
+    <script>
+      function input(e) {
+        const tbInput = document.getElementById('tbInput');
+        tbInput.value = tbInput.value + e.value;
+      }
+
+      function del() {
+        const tbInput = document.getElementById('tbInput');
+        tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
+      }
+    </script>
+      <div class="row justify-content-center">
+        <div class="form-group col-sm-3">
+          <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
+        </div>
+      </div>
       <div class="row justify-content-center">
         <div class="form-group">
           <input class="btn btn-info pl-3 pr-3" type="button" value="1" onclick="input(this);" />
@@ -44,7 +60,7 @@
       </div>
       <div class="justify-content-center">
         <p class="float-left pl-5">Score: {{ mathgame.score }}</p>
-        <p class="float-right pr-5">Time Left: </p>
+        <p class="float-right pr-5">Time Left: {{ mathgame.time_left }}</p>
       </div>
       {% endif %}
       {% if 'start' in request.path %}

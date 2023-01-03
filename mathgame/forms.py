@@ -25,9 +25,5 @@ class MathgameForm(ModelForm):
 class MathgamePlayForm(ModelForm):
     class Meta:
         model = Mathgame
-        fields = ['answer']
-        widgets = {
-            'answer': NumberInput(
-                attrs={'autofocus': True}
-            )
-        }
+        fields = []
+        
