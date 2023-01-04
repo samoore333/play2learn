@@ -27,10 +27,6 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
-    answer = models.IntegerField(blank=True, null=True)
-    end_time = models.DateTimeField(blank=True, null=True, auto_now_add=True)
-    time_left = models.IntegerField(default=30)
-    score = models.IntegerField(default=0)
 
     @property
     def get_random_nums():
@@ -65,6 +61,20 @@ class Mathgame(models.Model):
     def __str__(self):
         return self.operation
 
-class Game_num(models.Model):
+class Gameplay(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name='gameplays'
+    )
+    mathgame = models.ForeignKey(
+        Mathgame, on_delete=models.CASCADE,
+        related_name='gameplays'
+    )
     num1 = models.IntegerField(blank=True, null=True)
     num2 = models.IntegerField(blank=True, null=True)
+    correct_answer = models.IntegerField(blank=True, null=True)
+    incorrect_answer = models.IntegerField(blank=True, null=True)
+    score = models.IntegerField(default=0)
+    time_left = models.IntegerField(default=30)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)

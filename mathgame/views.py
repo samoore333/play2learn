@@ -18,7 +18,7 @@ class MathgameDetailView(DetailView):
 
 class MathgameListView(LoginRequiredMixin, ListView):
     model = Mathgame
-    fields = ['operation', 'max_number', 'score', 'end_time']
+    fields = ['operation', 'max_number']
     paginate_by = 10
     ordering = ['score']
 
