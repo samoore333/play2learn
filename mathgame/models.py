@@ -28,26 +28,6 @@ class Mathgame(models.Model):
         max_length=50, unique=True, null=False, editable=False
     )
 
-    @property
-    def get_random_nums():
-        if ['operation'] == '+':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == 'x':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == '-':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, ['max_number'])
-            numx = random.randint(1, ['max_number'])
-            num1 = num2 * numx
-        
-        return num1, num2
-
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
 
@@ -78,3 +58,31 @@ class Gameplay(models.Model):
     time_left = models.IntegerField(default=30)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def get_random_nums():
+        if ['operation'] == '+':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+        elif ['operation'] == 'x':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+        elif ['operation'] == '-':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+            if num2 > num1:
+                num2, num1 = num1, num2
+        else:
+            num2 = random.randint(1, ['max_number'])
+            numx = random.randint(1, ['max_number'])
+            num1 = num2 * numx
+        
+        return num1, num2
+
+    @property
+    def correct_answers(self):
+        return self.gameplays.filter(score=1).count()
+    
+    @property
+    def timer(self):
+        return self.gameplays.filter(time_left=-1).count()
