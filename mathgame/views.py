@@ -26,22 +26,3 @@ class MathgameListView(LoginRequiredMixin, ListView):
 class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
-
-    def get_random_nums():  
-        if ['operation'] == '+':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == 'x':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == '-':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, ['max_number'])
-            numx = random.randint(1, ['max_number'])
-            num1 = num2 * numx
-        
-            return num1, num2

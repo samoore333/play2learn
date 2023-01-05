@@ -6,25 +6,6 @@ import random
 
 from common.utils.text import unique_slug
 
-def random_nums(num1, num2):
-
-    if ['operation'] == '+':
-        num1 = random.randint(1, ['max_number'])
-        num2 = random.randint(1, ['max_number'])
-    elif ['operation'] == 'x':
-        num1 = random.randint(1, ['max_number'])
-        num2 = random.randint(1, ['max_number'])
-    elif ['operation'] == '-':
-        num1 = random.randint(1, ['max_number'])
-        num2 = random.randint(1, ['max_number'])
-        if num2 > num1:
-            num2, num1 = num1, num2
-    else:
-        num2 = random.randint(1, ['max_number'])
-        numx = random.randint(1, ['max_number'])
-        num1 = num2 * numx
-    return num1, num2
-    
     
 class Mathgame(models.Model):
     ADDITION = '+'
@@ -47,16 +28,34 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
-    num1 = models.IntegerField(blank=True, null=True, default=random_nums)
-    num2 = models.IntegerField(blank=True, null=True, default=random_nums)
+
+    def random_nums():
+        if ['operation'] == '+':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+        elif ['operation'] == 'x':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+        elif ['operation'] == '-':
+            num1 = random.randint(1, ['max_number'])
+            num2 = random.randint(1, ['max_number'])
+            if num2 > num1:
+                num2, num1 = num1, num2
+        else:
+            num2 = random.randint(1, ['max_number'])
+            numx = random.randint(1, ['max_number'])
+            num1 = num2 * numx
+        return num1, num2
+        
+
+    num1 = models.IntegerField(blank=True, null=True)
+    num2 = models.IntegerField(blank=True, null=True)
     correct_answer = models.IntegerField(blank=True, null=True)
     incorrect_answer = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(default=0)
     time_left = models.IntegerField(default=30)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    
 
     @property
     def correct_answers(self):
