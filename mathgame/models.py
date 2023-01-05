@@ -1,3 +1,4 @@
+from django import template
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -5,7 +6,26 @@ import random
 
 from common.utils.text import unique_slug
 
+def random_nums(num1, num2):
 
+    if ['operation'] == '+':
+        num1 = random.randint(1, ['max_number'])
+        num2 = random.randint(1, ['max_number'])
+    elif ['operation'] == 'x':
+        num1 = random.randint(1, ['max_number'])
+        num2 = random.randint(1, ['max_number'])
+    elif ['operation'] == '-':
+        num1 = random.randint(1, ['max_number'])
+        num2 = random.randint(1, ['max_number'])
+        if num2 > num1:
+            num2, num1 = num1, num2
+    else:
+        num2 = random.randint(1, ['max_number'])
+        numx = random.randint(1, ['max_number'])
+        num1 = num2 * numx
+    return num1, num2
+    
+    
 class Mathgame(models.Model):
     ADDITION = '+'
     SUBTRACTION = '-'
@@ -27,6 +47,24 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
+    num1 = models.IntegerField(blank=True, null=True, default=random_nums)
+    num2 = models.IntegerField(blank=True, null=True, default=random_nums)
+    correct_answer = models.IntegerField(blank=True, null=True)
+    incorrect_answer = models.IntegerField(blank=True, null=True)
+    score = models.IntegerField(default=0)
+    time_left = models.IntegerField(default=30)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    
+
+    @property
+    def correct_answers(self):
+        return self.mathgames.filter(score=1).count()
+    
+    @property
+    def timer(self):
+        return self.mathgames.filter(time_left=-1).count()
 
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
@@ -40,49 +78,3 @@ class Mathgame(models.Model):
 
     def __str__(self):
         return self.operation
-
-class Gameplay(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        related_name='gameplays'
-    )
-    mathgame = models.ForeignKey(
-        Mathgame, on_delete=models.CASCADE,
-        related_name='gameplays'
-    )
-    num1 = models.IntegerField(blank=True, null=True)
-    num2 = models.IntegerField(blank=True, null=True)
-    correct_answer = models.IntegerField(blank=True, null=True)
-    incorrect_answer = models.IntegerField(blank=True, null=True)
-    score = models.IntegerField(default=0)
-    time_left = models.IntegerField(default=30)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    @property
-    def get_random_nums():
-        if ['operation'] == '+':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == 'x':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == '-':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, ['max_number'])
-            numx = random.randint(1, ['max_number'])
-            num1 = num2 * numx
-        
-        return num1, num2
-
-    @property
-    def correct_answers(self):
-        return self.gameplays.filter(score=1).count()
-    
-    @property
-    def timer(self):
-        return self.gameplays.filter(time_left=-1).count()
