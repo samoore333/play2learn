@@ -1,8 +1,12 @@
 import random
 from time import sleep
 import threading
+from django import template
+from mathgame.models import Mathgame
 
+register = template.Library()
 
+@register.simple_tag
 def countdown():
     # Get timer for game
     global _my_timer
@@ -11,11 +15,13 @@ def countdown():
         _my_timer = _my_timer - 1
         sleep(1)
 
+@register.simple_tag
 def start_timer():
     # Timer starts
     countdown_thread = threading.Thread(target = countdown)
     countdown_thread.start()
 
+@register.simple_tag
 def user_answer():
     # Get answer
     while True:
@@ -25,26 +31,37 @@ def user_answer():
         else: 
             return int(user_input)
 
-def get_random_nums():
+@register.simple_tag
+def random_nums():
     # Get random numbers for game
-        if ['operation'] == '+':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == 'x':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == '-':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, ['max_number'])
-            numx = random.randint(1, ['max_number'])
-            num1 = num2 * numx
-        
-        return num1, num2
+    numList = []
+    if Mathgame.operation == '+':
+        a = random.randint(1, [Mathgame.max_number])
+        b = random.randint(1, [Mathgame.max_number])
+        numList.append(a)
+        numList.append(b)
+    elif Mathgame.operation == 'x':
+        a = random.randint(1, [Mathgame.max_number])
+        b = random.randint(1, [Mathgame.max_number])
+        numList.append(a)
+        numList.append(b)
+    elif Mathgame.operation == '-':
+        a = random.randint(1, [Mathgame.max_number])
+        b = random.randint(1, [Mathgame.max_number])
+        if b > a:
+            b, a = a, b
+            numList.append(a)
+            numList.append(b)
+    else:
+        b = random.randint(1, [Mathgame.max_number])
+        c = random.randint(1, [Mathgame.max_number])
+        a = b * c
+        numList.append(a)
+        numList.append(b)
     
+    return numList
+
+@register.simple_tag 
 def get_correct_answer():
      # Get correct answer
         if ['operation'] == '+':
