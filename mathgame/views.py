@@ -45,4 +45,4 @@ class MathgameUpdateView(UpdateView):
             c = random.randint(1, [Mathgame.max_number])
             a = b * c
         
-        return {a: num1, b
+        return a, b
