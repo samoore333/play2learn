@@ -1,9 +1,4 @@
-import json
 import random
-from time import sleep
-import threading
-from django.http import JsonResponse
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -31,12 +26,8 @@ class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
 
-    def random_nums(data, slug):
+    def random_nums(self):
     # Get random numbers for game
-        mathgame = Mathgame.objects.get(slug=slug)
-        data = json.loads(num1, num2)
-        num1 = data['num1']
-        num2 = data['num2']
         if Mathgame.operation == '+':
             num1 = random.randint(1, [Mathgame.max_number])
             num2 = random.randint(1, [Mathgame.max_number])
@@ -53,14 +44,4 @@ class MathgameUpdateView(UpdateView):
             numx = random.randint(1, [Mathgame.max_number])
             num1 = num2 * numx
 
-        response = {
-            'num1': num1,
-            'num2': num2
-        }
-        return JsonResponse(response)
-
-    def start_timer():
-        # Timer starts
-        timer = threading.Timer(30.0)
-        timer.start
-        return timer
+        return num1, num2

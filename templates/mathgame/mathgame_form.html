@@ -11,7 +11,7 @@
     {% if 'play' in request.path %}
       <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
-      <h1 class="text-center">{% random_nums numbers.num1 %} {{ mathgame.operation }} {% random_nums numbers.num2 %}</h1>
+      <h1 class="text-center">{{ Mathgame.num1 }} {{ mathgame.operation }} {{ Mathgame.num2 }}</h1>
     {% endif %}
     <form method="post" action="">
       {% csrf_token %}
@@ -69,14 +69,14 @@
             if(timeleft <= 0){
                 window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
             } else {
-                document.getElementById("playerTime").innerHTML = timeleft + " seconds";  
+                document.getElementById("playerTime").innerHTML = timeleft;  
             }
             timeleft -= 1;
         }, 1000);
       </script>
         <div id="time" class="d-flex justify-content-end">
           <p><strong>Time Left:</strong>&nbsp;</p>
-          <p id="playerTime">seconds</p>
+          <p id="playerTime"></p>
         </div>
       {% endif %}
       {% if 'start' in request.path %}

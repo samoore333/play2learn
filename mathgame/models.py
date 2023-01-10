@@ -26,27 +26,7 @@ class Mathgame(models.Model):
     )
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
-    )
-
-    def random_nums():
-        if ['operation'] == '+':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == 'x':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-        elif ['operation'] == '-':
-            num1 = random.randint(1, ['max_number'])
-            num2 = random.randint(1, ['max_number'])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, ['max_number'])
-            numx = random.randint(1, ['max_number'])
-            num1 = num2 * numx
-        return num1, num2
-        
-
+    )   
     num1 = models.IntegerField(blank=True, null=True)
     num2 = models.IntegerField(blank=True, null=True)
     correct_answer = models.IntegerField(blank=True, null=True)
@@ -55,6 +35,25 @@ class Mathgame(models.Model):
     time_left = models.IntegerField(default=30)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def random_nums(self):
+        if Mathgame.operation == '+':
+            num1 = random.randint(1, [Mathgame.max_number])
+            num2 = random.randint(1, [Mathgame.max_number])
+        elif Mathgame.operation == 'x':
+            num1 = random.randint(1, [Mathgame.max_number])
+            num2 = random.randint(1, [Mathgame.max_number])
+        elif Mathgame.operation == '-':
+            num1 = random.randint(1, [Mathgame.max_number])
+            num2 = random.randint(1, [Mathgame.max_number])
+            if num2 > num1:
+                num2, num1 = num1, num2
+        else:
+            num2 = random.randint(1, [Mathgame.max_number])
+            numx = random.randint(1, [Mathgame.max_number])
+            num1 = num2 * numx
+        return self.num1, self.num2
 
     @property
     def correct_answers(self):
