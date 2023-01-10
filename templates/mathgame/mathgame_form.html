@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load static %}
 {% load math_facts %}
 {% load crispy_forms_tags %}
 
@@ -10,7 +11,7 @@
     {% if 'play' in request.path %}
       <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
-      <h1 class="text-center">{{ mathgame.a }} {{ mathgame.operation }} {{ mathgame.b }}</h1>
+      <h1 class="text-center">{% random_nums numbers.num1 %} {{ mathgame.operation }} {% random_nums numbers.num2 %}</h1>
     {% endif %}
     <form method="post" action="">
       {% csrf_token %}
@@ -60,9 +61,23 @@
         </div>
       </div>
       <div class="justify-content-center">
-        <p class="float-left pl-5">Score: {{ mathgame.score }}</p>
-        <p class="float-right pr-5">Time Left: {{ mathgame.time_left }}</p>
+        <p class="float-left">Score: {{ Mathgame.score }}</p>
       </div>
+      <script>
+        let timeleft = 30;
+        let gameTimer = + this.setInterval(function(){
+            if(timeleft <= 0){
+                window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+            } else {
+                document.getElementById("playerTime").innerHTML = timeleft + " seconds";  
+            }
+            timeleft -= 1;
+        }, 1000);
+      </script>
+        <div id="time" class="d-flex justify-content-end">
+          <p><strong>Time Left:</strong>&nbsp;</p>
+          <p id="playerTime">seconds</p>
+        </div>
       {% endif %}
       {% if 'start' in request.path %}
       <button class="btn btn-info btn-block">Go</button>
