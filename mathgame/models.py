@@ -27,41 +27,9 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )   
-    num1 = models.IntegerField(blank=True, null=True)
-    num2 = models.IntegerField(blank=True, null=True)
-    correct_answer = models.IntegerField(blank=True, null=True)
-    incorrect_answer = models.IntegerField(blank=True, null=True)
     score = models.IntegerField(default=0)
-    time_left = models.IntegerField(default=30)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    @property
-    def random_nums(self):
-        if Mathgame.operation == '+':
-            num1 = random.randint(1, [Mathgame.max_number])
-            num2 = random.randint(1, [Mathgame.max_number])
-        elif Mathgame.operation == 'x':
-            num1 = random.randint(1, [Mathgame.max_number])
-            num2 = random.randint(1, [Mathgame.max_number])
-        elif Mathgame.operation == '-':
-            num1 = random.randint(1, [Mathgame.max_number])
-            num2 = random.randint(1, [Mathgame.max_number])
-            if num2 > num1:
-                num2, num1 = num1, num2
-        else:
-            num2 = random.randint(1, [Mathgame.max_number])
-            numx = random.randint(1, [Mathgame.max_number])
-            num1 = num2 * numx
-        return self
-
-    @property
-    def correct_answers(self):
-        return self.mathgames.filter(score=1).count()
-    
-    @property
-    def timer(self):
-        return self.mathgames.filter(time_left=-1).count()
 
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])

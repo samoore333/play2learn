@@ -1,3 +1,4 @@
+from django.shortcuts import render
 import random
 from time import sleep
 import threading
@@ -49,25 +50,28 @@ def user_answer():
         else: 
             return int(user_input)
 
-@register.inclusion_tag('mathgame/mathgame_form.html')
-def random_nums(self):
+@register.simple_tag
+def randomNums(num1='num1'):
     # Get random numbers for game
     if Mathgame.operation == '+':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
+        return num1
     elif Mathgame.operation == 'x':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
+        return num1
     elif Mathgame.operation == '-':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
         if num2 > num1:
             num2, num1 = num1, num2
+            return num1
     else:
         num2 = random.randint(1, [Mathgame.max_number])
         numx = random.randint(1, [Mathgame.max_number])
         num1 = num2 * numx
-
+    
     return num1
 
 @register.simple_tag 

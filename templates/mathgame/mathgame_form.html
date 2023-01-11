@@ -9,25 +9,28 @@
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
     {% if 'play' in request.path %}
-      <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
+      <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
-      <h1 class="text-center">{{ mathgame.num1 }} {{ mathgame.operation }} {{ mathgame.num2 }}</h1>
+      {% randomNums as num1 %}
+      <h1 class="text-center"> {{ num1 }} {{ mathgame.operation }} <span id="num2">13</span></h1>
     {% endif %}
     <form method="post" action="">
       {% csrf_token %}
       {{ form|crispy }}
     {% if 'play' in request.path %}
-    <script>
-      function input(e) {
-        const tbInput = document.getElementById('tbInput');
-        tbInput.value = tbInput.value + e.value;
-      }
+    {% block input %}
+      <script>
+        function input(e) {
+          const tbInput = document.getElementById('tbInput');
+          tbInput.value = tbInput.value + e.value;
+        }
 
-      function del() {
-        const tbInput = document.getElementById('tbInput');
-        tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
-      }
-    </script>
+        function del() {
+          const tbInput = document.getElementById('tbInput');
+          tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
+        }
+      </script>
+    {% endblock %}
       <div class="row justify-content-center">
         <div class="form-group col-sm-3">
           <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
@@ -63,20 +66,22 @@
       <div class="justify-content-center">
         <p class="float-left">Score: {{ Mathgame.score }}</p>
       </div>
-      <script>
-        let timeleft = 30;
-        let gameTimer = + this.setInterval(function(){
-            if(timeleft <= 0){
-                window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
-            } else {
-                document.getElementById("playerTime").innerHTML = timeleft;  
-            }
-            timeleft -= 1;
-        }, 1000);
-      </script>
+      {% block timer %}
+        <script>
+          let timeleft = 29;
+          let gameTimer = + this.setInterval(function(){
+              if(timeleft <= 0){
+                  window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+              } else {
+                  document.getElementById("playerTime").innerHTML = timeleft;  
+              }
+              timeleft -= 1;
+          }, 1000);
+        </script>
+      {% endblock %}
         <div id="time" class="d-flex justify-content-end">
           <p><strong>Time Left:</strong>&nbsp;</p>
-          <p id="playerTime"></p>
+          <p id="playerTime">30</p>
         </div>
       {% endif %}
       {% if 'start' in request.path %}

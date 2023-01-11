@@ -27,7 +27,7 @@ class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
 
-def random_nums(num1, num2):
+def random_nums():
 # Get random numbers for game
     if Mathgame.operation == '+':
         num1 = random.randint(1, [Mathgame.max_number])
@@ -45,4 +45,4 @@ def random_nums(num1, num2):
         numx = random.randint(1, [Mathgame.max_number])
         num1 = num2 * numx
 
-    return num1, num2
+    return num1 + num2
