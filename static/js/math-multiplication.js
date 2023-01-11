@@ -9,18 +9,6 @@ window.addEventListener('load', function math() {
     document.getElementById('tbInput').focus();
     const multiplicationEnd = document.getElementById('multiplicationEnd');
     const multiplicationGame = document.getElementById('multiplicationGame');
-    
-    let timeleft = 30;
-    let gameTimer = + this.setInterval(function(){
-        if(timeleft <= 0){
-            clearInterval(gameTimer);
-            $("#multiplicationEnd").modal();
-        
-        } else {
-            document.getElementById("playerTime").innerHTML = timeleft + " seconds remaining";  
-        }
-        timeleft -= 1;
-    }, 1000);
 
 
 window.addEventListener("keydown", function(e) {

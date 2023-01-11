@@ -9,18 +9,6 @@ window.addEventListener('load', function math() {
     document.getElementById('tbInput').focus();
     const divisionEnd = document.getElementById('divisionEnd');
     const divisionGame = document.getElementById('divisionGame');
-    
-    let timeleft = 30;
-    let gameTimer = + this.setInterval(function(){
-        if(timeleft <= 0){
-            clearInterval(gameTimer);
-            $("#divisionEnd").modal();
-        
-        } else {
-            document.getElementById("playerTime").innerHTML = timeleft + " seconds remaining";  
-        }
-        timeleft -= 1;
-    }, 1000);
 
 
 window.addEventListener("keydown", function(e) {

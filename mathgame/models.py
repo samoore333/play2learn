@@ -53,7 +53,7 @@ class Mathgame(models.Model):
             num2 = random.randint(1, [Mathgame.max_number])
             numx = random.randint(1, [Mathgame.max_number])
             num1 = num2 * numx
-        return self.num1, self.num2
+        return self
 
     @property
     def correct_answers(self):

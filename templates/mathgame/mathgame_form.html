@@ -11,7 +11,7 @@
     {% if 'play' in request.path %}
       <div class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
-      <h1 class="text-center">{{ Mathgame.num1 }} {{ mathgame.operation }} {{ Mathgame.num2 }}</h1>
+      <h1 class="text-center">{{ mathgame.num1 }} {{ mathgame.operation }} {{ mathgame.num2 }}</h1>
     {% endif %}
     <form method="post" action="">
       {% csrf_token %}

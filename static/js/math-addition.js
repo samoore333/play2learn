@@ -9,18 +9,6 @@ window.addEventListener('load', function math() {
     document.getElementById('tbInput').focus();
     const additionEnd = document.getElementById('additionEnd');
     const additionGame = document.getElementById('additionGame');
-    
-    let timeleft = 30;
-    let gameTimer = + this.setInterval(function(){
-        if(timeleft <= 0){
-            clearInterval(gameTimer);
-            $("#additionEnd").modal();
-        } else {
-            document.getElementById("playerTime").innerHTML = timeleft + " seconds remaining";  
-        }
-        timeleft -= 1;
-    }, 1000);
-
 
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {

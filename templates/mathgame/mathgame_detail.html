@@ -18,6 +18,6 @@
         User: {{ mathgame.user.username }}
       </small>
     </div>
-    <a class="btn btn-info" href="">Play Again</a>
+    <a class="btn btn-info" href="{% url 'mathgame:start' %}">Play Again</a>
   </div>
 {% endblock %}
