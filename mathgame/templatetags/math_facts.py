@@ -51,28 +51,29 @@ def user_answer():
             return int(user_input)
 
 @register.simple_tag
-def randomNums(num1='num1'):
+def randNum(start, stop):
+    return random.randint(start, stop)
+
+@register.simple_tag
+def randomNum():
     # Get random numbers for game
     if Mathgame.operation == '+':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
-        return num1
-    elif Mathgame.operation == 'x':
+    elif Mathgame.operation == '*':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
-        return num1
     elif Mathgame.operation == '-':
         num1 = random.randint(1, [Mathgame.max_number])
         num2 = random.randint(1, [Mathgame.max_number])
         if num2 > num1:
             num2, num1 = num1, num2
-            return num1
     else:
         num2 = random.randint(1, [Mathgame.max_number])
         numx = random.randint(1, [Mathgame.max_number])
         num1 = num2 * numx
-    
-    return num1
+
+    return num1, num2
 
 @register.simple_tag 
 def get_correct_answer():

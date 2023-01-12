@@ -43,3 +43,6 @@ class Mathgame(models.Model):
 
     def __str__(self):
         return self.operation
+    
+    def __int__(self):
+        return self.max_number

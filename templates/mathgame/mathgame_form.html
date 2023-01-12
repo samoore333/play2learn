@@ -11,8 +11,18 @@
     {% if 'play' in request.path %}
       <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
-      {% randomNums as num1 %}
-      <h1 class="text-center"> {{ num1 }} {{ mathgame.operation }} <span id="num2">13</span></h1>
+      {% if mathgame.operation == '+' %}
+        <h1 class="text-center">{% randNum 1 mathgame.max_number %} + {% randNum 1 mathgame.max_number %}</h1>
+      {% endif %}
+      {% if mathgame.operation == '-' %}
+        <h1 class="text-center">{% randNum mathgame.max_number mathgame.max_number %} - {% randNum 1 mathgame.max_number %}</h1>
+      {% endif %}
+      {% if mathgame.operation == '*' %}
+        <h1 class="text-center">{% randNum 1 mathgame.max_number %} x {% randNum 1 mathgame.max_number %}</h1>
+      {% endif %}
+      {% if mathgame.operation == '/' %}
+        <h1 class="text-center">{% randNum mathgame.max_number mathgame.max_number %} / {% randNum 1 mathgame.max_number %}</h1>
+      {% endif %}
     {% endif %}
     <form method="post" action="">
       {% csrf_token %}
