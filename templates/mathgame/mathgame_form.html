@@ -5,7 +5,7 @@
 
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
-  <div id="start" class="card border-info m-auto mb-3 p-3 bg-light"
+  <div id="start" class="card border-info m-auto p-3 bg-light"
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
     {% if 'play' in request.path %}
@@ -73,8 +73,14 @@
           <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
         </div>
       </div>
-      <div class="justify-content-center">
-        <p class="float-left">Score: {{ Mathgame.score }}</p>
+      <div class="float-left font-weight-bold">
+        <p>Score:&nbsp;</p>
+      </div>
+      <div class="float-right font-weight-bold">
+        <p>Time Left:&nbsp;<span id="playerTime">30</span></p>
+      </div>
+      <div class="float-right font-weight-bold">
+        <p>Time2 Left:&nbsp;{% start_timer2 %}</p>
       </div>
       {% block timer %}
         <script>
@@ -89,10 +95,6 @@
           }, 1000);
         </script>
       {% endblock %}
-        <div id="time" class="d-flex justify-content-end">
-          <p><strong>Time Left:</strong>&nbsp;</p>
-          <p id="playerTime">30</p>
-        </div>
       {% endif %}
       {% if 'start' in request.path %}
       <button class="btn btn-info btn-block">Go</button>

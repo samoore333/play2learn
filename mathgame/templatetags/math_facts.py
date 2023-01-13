@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from datetime import timedelta
+from countdowntimer import CountDownTimer
+import time
 import random
 from time import sleep
 import threading
@@ -8,37 +10,25 @@ from mathgame.models import Mathgame
 register = template.Library()
 
 @register.simple_tag
-def countdown():
-    # Get timer for game
-    global time_left
-    time_left = 30
-    for x in range(30):
-        time_left = time_left - 1
-        sleep(1)
-
-@register.simple_tag
-def start_timer():
-    # Timer starts
-    def countdown():
-        global time_left
-        time_left = 30
+def start_timer(): # Timer for game
+    global _my_timer
+    _my_timer = 30
+    def timer():
         for x in range(30):
-            time_left = time_left - 1
+            self = self - 1
             sleep(1)
-    countdown_thread = threading.Thread(target = countdown)
+    countdown_thread = threading.Thread(target = timer)
     countdown_thread.start()
-    return time_left
-    
+    return _my_timer
 
 @register.simple_tag
-def countdown():
-    # Get timer for game
-    global time_left
-    time_left = 30
-    for x in range(30):
-        time_left = time_left - 1
-        sleep(1)
-    
+def start_timer2(): # Timer for game
+    start = time.localtime(time.time())
+    end = start + timedelta(seconds=30)
+    for s in range(30):
+            self = self - 1
+            sleep(1)
+    return end
 
 @register.simple_tag
 def user_answer():
@@ -50,7 +40,7 @@ def user_answer():
         else: 
             return int(user_input)
 
-@register.simple_tag
+@register.simple_tag # Random number generator
 def randNum(start, stop):
     return random.randint(start, stop)
 
