@@ -8,27 +8,7 @@ from django import template
 from mathgame.models import Mathgame
 
 register = template.Library()
-
-@register.simple_tag
-def start_timer(): # Timer for game
-    global _my_timer
-    _my_timer = 30
-    def timer():
-        for x in range(30):
-            self = self - 1
-            sleep(1)
-    countdown_thread = threading.Thread(target = timer)
-    countdown_thread.start()
-    return _my_timer
-
-@register.simple_tag
-def start_timer2(): # Timer for game
-    start = time.localtime(time.time())
-    end = start + timedelta(seconds=30)
-    for s in range(30):
-            self = self - 1
-            sleep(1)
-    return end
+    
 
 @register.simple_tag
 def user_answer():

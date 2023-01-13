@@ -77,22 +77,36 @@
         <p>Score:&nbsp;</p>
       </div>
       <div class="float-right font-weight-bold">
-        <p>Time Left:&nbsp;<span id="playerTime">30</span></p>
-      </div>
-      <div class="float-right font-weight-bold">
-        <p>Time2 Left:&nbsp;{% start_timer2 %}</p>
+        <p>Time Left:&nbsp;<span id="playerTime"></span></p>
       </div>
       {% block timer %}
         <script>
-          let timeleft = 29;
-          let gameTimer = + this.setInterval(function(){
-              if(timeleft <= 0){
-                  window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+          const COUNTER_KEY = 'my-counter';
+
+          function countDown(i, callback) {
+            //callback = callback || function(){};
+            timer = setInterval(function() {
+              seconds = parseInt(i % 60, 10);
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+
+              if ((i--) > 0) {
+                document.getElementById("playerTime").innerHTML = seconds;
+                window.sessionStorage.setItem(COUNTER_KEY, i);
               } else {
-                  document.getElementById("playerTime").innerHTML = timeleft;  
+                window.sessionStorage.removeItem(COUNTER_KEY);
+                clearInterval(timer);
+                callback();
+                window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
               }
-              timeleft -= 1;
-          }, 1000);
+            }, 1000);
+          }
+
+          window.onload = function() {
+            let countDownTime = window.sessionStorage.getItem(COUNTER_KEY) || 30;
+            countDown(countDownTime, function() {
+              $('#myModal').modal('show');
+            });
+          };
         </script>
       {% endblock %}
       {% endif %}
