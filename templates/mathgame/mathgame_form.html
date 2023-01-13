@@ -12,16 +12,32 @@
       <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
       <br>
       {% if mathgame.operation == '+' %}
-        <h1 class="text-center">{% randNum 1 mathgame.max_number %} + {% randNum 1 mathgame.max_number %}</h1>
+        <h1 class="text-center">
+          <span id="number1">{% randNum 1 mathgame.max_number %}</span>
+          <span id="operator">+</span> 
+          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+        </h1>
       {% endif %}
       {% if mathgame.operation == '-' %}
-        <h1 class="text-center">{% randNum mathgame.max_number mathgame.max_number %} - {% randNum 1 mathgame.max_number %}</h1>
+        <h1 class="text-center">
+          <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
+          <span id="operator">-</span>
+          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+        </h1>
       {% endif %}
       {% if mathgame.operation == '*' %}
-        <h1 class="text-center">{% randNum 1 mathgame.max_number %} x {% randNum 1 mathgame.max_number %}</h1>
+        <h1 class="text-center">
+          <span id="number1">{% randNum 1 mathgame.max_number %}</span>
+          <span id="operator">x</span>
+          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+        </h1>
       {% endif %}
       {% if mathgame.operation == '/' %}
-        <h1 class="text-center">{% randNum mathgame.max_number mathgame.max_number %} / {% randNum 1 mathgame.max_number %}</h1>
+        <h1 class="text-center">
+          <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
+          <span id="operator">/</span>
+          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+        </h1>
       {% endif %}
     {% endif %}
     <form method="post" action="">
@@ -40,10 +56,10 @@
           tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
         }
       </script>
-    {% endblock %}
       <div class="row justify-content-center">
         <div class="form-group col-sm-3">
-          <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
+          <script src="{% static 'js/mathgame.js' %}"></script>
+          <input onclick="check()" class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -73,8 +89,9 @@
           <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
         </div>
       </div>
+    {% endblock %}
       <div class="float-left font-weight-bold">
-        <p>Score:&nbsp;</p>
+        <p>Score:&nbsp;<span id="playerScore"></span></p>
       </div>
       <div class="float-right font-weight-bold">
         <p>Time Left:&nbsp;<span id="playerTime"></span></p>
