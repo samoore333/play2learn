@@ -1,9 +1,4 @@
-from datetime import timedelta
-from countdowntimer import CountDownTimer
-import time
 import random
-from time import sleep
-import threading
 from django import template
 from mathgame.models import Mathgame
 

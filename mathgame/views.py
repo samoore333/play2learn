@@ -1,5 +1,3 @@
-from time import sleep
-import threading
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
