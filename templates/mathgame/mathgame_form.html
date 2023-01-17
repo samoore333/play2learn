@@ -3,6 +3,9 @@
 {% load math_facts %}
 {% load crispy_forms_tags %}
 
+{% block javascript %}
+  <script src="{% static 'js/mathgame.js' %}"></script>
+{% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
   <div id="start" class="card border-info m-auto p-3 bg-light"
@@ -91,7 +94,7 @@
       </div>
     {% endblock %}
       <div class="float-left font-weight-bold">
-        <p>Score:&nbsp;<span id="playerScore"></span></p>
+        <p>Score:&nbsp;<span id="playerScore">0</span></p>
       </div>
       <div class="float-right font-weight-bold">
         <p>Time Left:&nbsp;<span id="playerTime"></span></p>

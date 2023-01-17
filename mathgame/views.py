@@ -1,6 +1,7 @@
+import json
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.http import JsonResponse
 from .models import Mathgame
 from .forms import MathgameForm, MathgamePlayForm
 
@@ -24,3 +25,18 @@ class MathgameListView(LoginRequiredMixin, ListView):
 class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
+
+def score(request, slug):
+    user = request.user # The logged-in user
+    mathgame = Mathgame.objects.get(slug=slug) # The mathgame instance.
+    data = json.loads(request.body) # Data from the JavaScript.
+
+    user_score = Mathgame(user=user, mathgame=mathgame, score=score)
+    user_score.save()
+
+    correct = data['correct']
+    score == correct.count
+
+    response = score
+
+    return JsonResponse(response)
