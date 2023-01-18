@@ -1,6 +1,6 @@
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {
-        
+
         let number1 = document.getElementById('number1').innerHTML;
         let number2 = document.getElementById('number2').innerHTML;
         let num1 = Number(number1);
@@ -19,14 +19,24 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
-        let score = + this.document.getElementById('score').innerHTML;
+        const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+        const csrfToken = csrfInput.value;
+        const data = {'score': score}
 
         if (value == answer) {
-            score+=1;
-            console.log(score)
-            document.getElementById('score').innerHTML=score
+            score.register(1);
+            const score = Number(document.getElementById('score').innerHTML);
         } else {
             alert('You are incorrect, the answer was ' + answer);
-        }
-    }
+        }     
+
+        fetch(ajaxURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(data),
+        })
+    }  
 })

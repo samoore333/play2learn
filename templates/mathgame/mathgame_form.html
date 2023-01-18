@@ -62,7 +62,7 @@
       <div class="row justify-content-center">
         <div class="form-group col-sm-3">
           <script src="{% static 'js/mathgame.js' %}"></script>
-          <input onclick="check()" class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
+          <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -94,7 +94,7 @@
       </div>
     {% endblock %}
       <div class="float-left font-weight-bold">
-        <p>Score:&nbsp;<span id="playerScore">0</span></p>
+        <p>Score:&nbsp;<span id='score'>{{ mathgame.score }}</span></p>
       </div>
       <div class="float-right font-weight-bold">
         <p>Time Left:&nbsp;<span id="playerTime"></span></p>

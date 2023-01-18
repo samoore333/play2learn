@@ -26,3 +26,4 @@ class MathgamePlayForm(ModelForm):
     class Meta:
         model = Mathgame
         fields = []
+        
