@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (
     MathgameCreateView, MathgameDetailView, MathgameListView,
-     MathgameUpdateView, score
+     MathgameUpdateView
 )
 
 app_name = 'mathgame'

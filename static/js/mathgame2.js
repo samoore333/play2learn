@@ -19,24 +19,30 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
-        const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
-        const csrfToken = csrfInput.value;
-        const data = {'score': score}
-
         if (value == answer) {
-            score.register(1);
-            const score = Number(document.getElementById('score').innerHTML);
+            register(1)
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }     
-
-        fetch(ajaxURL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRFToken': csrfToken
-            },
-            body: JSON.stringify(data),
-        })
-    }  
+    }
 })
+
+function register(score) {
+    const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+    const csrfToken = csrfInput.value;
+    const score = Number(document.getElementById('score').innerHTML);
+    const data = {'score': score}
+
+    fetch(ajaxURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('score').innerHTML = data.score;  
+        });
+}

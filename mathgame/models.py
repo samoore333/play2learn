@@ -30,6 +30,10 @@ class Mathgame(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    @property
+    def playerScore(self):
+        return self.score.count()
+
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
 

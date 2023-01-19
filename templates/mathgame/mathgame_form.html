@@ -11,135 +11,132 @@
   <div id="start" class="card border-info m-auto p-3 bg-light"
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
-    {% if 'play' in request.path %}
-      <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
-      <br>
-      {% if mathgame.operation == '+' %}
-        <h1 class="text-center">
-          <span id="number1">{% randNum 1 mathgame.max_number %}</span>
-          <span id="operator">+</span> 
-          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-        </h1>
-      {% endif %}
-      {% if mathgame.operation == '-' %}
-        <h1 class="text-center">
-          <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
-          <span id="operator">-</span>
-          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-        </h1>
-      {% endif %}
-      {% if mathgame.operation == '*' %}
-        <h1 class="text-center">
-          <span id="number1">{% randNum 1 mathgame.max_number %}</span>
-          <span id="operator">x</span>
-          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-        </h1>
-      {% endif %}
-      {% if mathgame.operation == '/' %}
-        <h1 class="text-center">
-          <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
-          <span id="operator">/</span>
-          <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-        </h1>
-      {% endif %}
-    {% endif %}
     <form method="post" action="">
       {% csrf_token %}
       {{ form|crispy }}
-    {% if 'play' in request.path %}
-    {% block input %}
-      <script>
-        function input(e) {
-          const tbInput = document.getElementById('tbInput');
-          tbInput.value = tbInput.value + e.value;
-        }
-
-        function del() {
-          const tbInput = document.getElementById('tbInput');
-          tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
-        }
-      </script>
-      <div class="row justify-content-center">
-        <div class="form-group col-sm-3">
-          <script src="{% static 'js/mathgame.js' %}"></script>
-          <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="form-group">
-          <input class="btn btn-info pl-3 pr-3" type="button" value="1" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="2" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="3" onclick="input(this);" />
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="form-group">
-          <input class="btn btn-info pl-3 pr-3" type="button" value="4" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="5" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="6" onclick="input(this);" />
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="form-group">
-          <input class="btn btn-info pl-3 pr-3" type="button" value="7" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="8" onclick="input(this);" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="9" onclick="input(this);" />
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="form-group">
-          <input class="btn btn-info pl-3 pr-3" type="button" value="0" onclick="input(this)" />
-          <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
-        </div>
-      </div>
-    {% endblock %}
-      <div class="float-left font-weight-bold">
-        <p>Score:&nbsp;<span id='score'>{{ mathgame.score }}</span></p>
-      </div>
-      <div class="float-right font-weight-bold">
-        <p>Time Left:&nbsp;<span id="playerTime"></span></p>
-      </div>
-      {% block timer %}
-        <script>
-          const COUNTER_KEY = 'my-counter';
-
-          function countDown(i, callback) {
-            //callback = callback || function(){};
-            timer = setInterval(function() {
-              seconds = parseInt(i % 60, 10);
-              seconds = seconds < 10 ? "0" + seconds : seconds;
-
-              if ((i--) > 0) {
-                document.getElementById("playerTime").innerHTML = seconds;
-                window.sessionStorage.setItem(COUNTER_KEY, i);
-              } else {
-                window.sessionStorage.removeItem(COUNTER_KEY);
-                clearInterval(timer);
-                callback();
-                window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+      {% if 'play' in request.path %}
+        <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
+          <br>
+          {% if mathgame.operation == '+' %}
+            <h1 class="text-center">
+              <span id="number1">{% randNum 1 mathgame.max_number %}</span>
+              <span id="operator">+</span> 
+              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+            </h1>
+          {% endif %}
+          {% if mathgame.operation == '-' %}
+            <h1 class="text-center">
+              <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
+              <span id="operator">-</span>
+              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+            </h1>
+          {% endif %}
+          {% if mathgame.operation == '*' %}
+            <h1 class="text-center">
+              <span id="number1">{% randNum 1 mathgame.max_number %}</span>
+              <span id="operator">x</span>
+              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+            </h1>
+          {% endif %}
+          {% if mathgame.operation == '/' %}
+            <h1 class="text-center">
+              <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
+              <span id="operator">/</span>
+              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
+            </h1>
+          {% endif %}
+          {% block input %}
+            <script>
+              function input(e) {
+                const tbInput = document.getElementById('tbInput');
+                tbInput.value = tbInput.value + e.value;
               }
-            }, 1000);
-          }
 
-          window.onload = function() {
-            let countDownTime = window.sessionStorage.getItem(COUNTER_KEY) || 30;
-            countDown(countDownTime, function() {
-              $('#myModal').modal('show');
-            });
-          };
-        </script>
-      {% endblock %}
+              function del() {
+                const tbInput = document.getElementById('tbInput');
+                tbInput.value = tbInput.value.substr(0, tbInput.value.length - 1);
+              }
+            </script>
+            <div class="row justify-content-center">
+              <div class="form-group col-sm-3">
+                <script src="{% static 'js/mathgame.js' %}"></script>
+                <input class="form-control border-dark" id="tbInput" name="tbInput" type="text" autofocus>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group">
+                <input class="btn btn-info pl-3 pr-3" type="button" value="1" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="2" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="3" onclick="input(this);" />
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group">
+                <input class="btn btn-info pl-3 pr-3" type="button" value="4" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="5" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="6" onclick="input(this);" />
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group">
+                <input class="btn btn-info pl-3 pr-3" type="button" value="7" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="8" onclick="input(this);" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="9" onclick="input(this);" />
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group">
+                <input class="btn btn-info pl-3 pr-3" type="button" value="0" onclick="input(this)" />
+                <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
+              </div>
+            </div>
+          {% endblock %}
+          <div>
+            <p class="float-left font-weight-bold">Score:&nbsp;<span id='score'>{{ mathgame.score }}</span></p>
+            <p class="float-right font-weight-bold">Time Left:&nbsp;<span id="playerTime"></span></p>
+          </div>
+          {% block timer %}
+            <script>
+              const COUNTER_KEY = 'my-counter';
+
+              function countDown(i, callback) {
+                //callback = callback || function(){};
+                timer = setInterval(function() {
+                  seconds = parseInt(i % 60, 10);
+                  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                  if ((i--) > 0) {
+                    document.getElementById("playerTime").innerHTML = seconds;
+                    window.sessionStorage.setItem(COUNTER_KEY, i);
+                  } else {
+                    window.sessionStorage.removeItem(COUNTER_KEY);
+                    clearInterval(timer);
+                    callback();
+                    window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+                  }
+                }, 1000);
+              }
+
+              window.onload = function() {
+                let countDownTime = window.sessionStorage.getItem(COUNTER_KEY) || 30;
+                countDown(countDownTime, function() {
+                  $('#myModal').modal('show');
+                });
+              };
+            </script>
+          {% endblock %}
+        </div>
       {% endif %}
       {% if 'start' in request.path %}
-      <button class="btn btn-info btn-block">Go</button>
+          <button class="btn btn-info btn-block">Go</button>
     </form>
-    <br>
-    <ol>
-        <li>Select operation.</li>
-        <li>Select max number.</li>
-        <li >Press <strong>Go.</strong></li>
-    </ol>
-    <p class="font-weight-bold text-center text-uppercase text-warning">How many problems can you solve in 30 seconds?</p>
-    {% endif %}
+        <br>
+        <ol>
+            <li>Select operation.</li>
+            <li>Select max number.</li>
+            <li >Press <strong>Go.</strong></li>
+        </ol>
+        <p class="font-weight-bold text-center text-uppercase text-warning">How many problems can you solve in 30 seconds?</p>
+      {% endif %}
   </div>
 {% endblock %}
