@@ -25,4 +25,3 @@ class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
 
-    

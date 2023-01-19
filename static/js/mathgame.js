@@ -19,12 +19,11 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
-        let score = + this.document.getElementById('score').innerHTML;
+        let score = + document.getElementById('score').innerHTML;
 
         if (value == answer) {
             score+=1;
-            console.log(score)
-            document.getElementById('score').innerHTML=score
+            document.getElementById('score').innerHTML = score;
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }

@@ -25,14 +25,11 @@ class Mathgame(models.Model):
     )
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
-    )   
+    )
     score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    @property
-    def playerScore(self):
-        return self.score.count()
 
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
