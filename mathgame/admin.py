@@ -5,7 +5,7 @@ from .models import Mathgame
 @admin.register(Mathgame)
 class MathgameAdmin(admin.ModelAdmin):
     model = Mathgame
-    list_display = ['operation', 'max_number']
+    list_display = ['operation', 'max_number', 'score', 'updated']
 
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object

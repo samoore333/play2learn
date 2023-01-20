@@ -8,6 +8,7 @@ window.addEventListener("keydown", function(e) {
         let operator = document.getElementById('operator').innerHTML;
         const checkAnswer = document.getElementById('tbInput');
         const value = checkAnswer.value;
+        let score = + this.document.getElementById('playerScore').innerHTML;
 
         if (operator == '+') {
             answer = num1 + num2;
@@ -19,11 +20,9 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
-        let score = + document.getElementById('score').innerHTML;
-
         if (value == answer) {
-            score+=1;
-            document.getElementById('score').innerHTML = score;
+            document.getElementById('playerScore').innerHTML =+1;
+            score.save()
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }

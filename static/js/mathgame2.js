@@ -19,18 +19,20 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
+        let score = + document.getElementById('score').innerHTML;
+
         if (value == answer) {
-            register(1)
+            score+=1;
+            document.getElementById('score').innerHTML = score;
         } else {
             alert('You are incorrect, the answer was ' + answer);
-        }     
+        }
     }
 })
 
 function register(score) {
     const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
     const csrfToken = csrfInput.value;
-    const score = Number(document.getElementById('score').innerHTML);
     const data = {'score': score}
 
     fetch(ajaxURL, {
@@ -42,7 +44,4 @@ function register(score) {
         body: JSON.stringify(data),
     })
         .then(response => response.json())
-        .then(data => {
-            document.getElementById('score').innerHTML = data.score;  
-        });
 }

@@ -15,7 +15,8 @@
       {% csrf_token %}
       {{ form|crispy }}
       {% if 'play' in request.path %}
-        <div id="operation" class="card-header font-weight-bold text-center">{{ mathgame.get_operation_display }}</div>
+        <div id="operation" class="card-header font-weight-bold text-center">
+          {{ mathgame.get_operation_display }}</div>
           <br>
           {% if mathgame.operation == '+' %}
             <h1 class="text-center">
@@ -92,8 +93,7 @@
           {% endblock %}
           <div>
             <p class="float-left font-weight-bold">Score:&nbsp;
-              <span id='score' method="post">
-                {{ mathgame.score }}</span>
+              <span id='playerScore' method="post" action="">{{ mathgame.score }}</span>
             </p>
             <p class="float-right font-weight-bold">Time Left:&nbsp;
               <span id="playerTime"></span></p>
