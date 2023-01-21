@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block javascript %}
-  <script src="{% static 'js/mathgame.js' %}"></script>
+  <script src="{% static 'js/mathgame2.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
@@ -65,39 +65,42 @@
             </div>
             <div class="row justify-content-center">
               <div class="form-group">
-                <input class="btn btn-info pl-3 pr-3" type="button" value="1" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="2" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="3" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="1" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="2" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="3" onclick="input(this);" />
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="form-group">
-                <input class="btn btn-info pl-3 pr-3" type="button" value="4" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="5" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="6" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="4" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="5" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="6" onclick="input(this);" />
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="form-group">
-                <input class="btn btn-info pl-3 pr-3" type="button" value="7" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="8" onclick="input(this);" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="9" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="7" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="8" onclick="input(this);" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="9" onclick="input(this);" />
               </div>
             </div>
             <div class="row justify-content-center">
               <div class="form-group">
-                <input class="btn btn-info pl-3 pr-3" type="button" value="0" onclick="input(this)" />
-                <input class="btn btn-info pl-3 pr-3" type="button" value="Clear" onclick="del();" />
+                <input class="btn btn-info pl-4 pr-4" type="button" value="0" onclick="input(this)" />
+                <input class="btn btn-info pl-2 pr-2" type="button" value="Clear" onclick="del();" />
+                <input class="btn btn-info pl-3 pr-3" type="submit" value="Enter"/>
               </div>
-            </div>
+              </div>
           {% endblock %}
-          <div>
-            <p class="float-left font-weight-bold">Score:&nbsp;
-              <span id='playerScore' method="post" action="">{{ mathgame.score }}</span>
-            </p>
-            <p class="float-right font-weight-bold">Time Left:&nbsp;
-              <span id="playerTime"></span></p>
-          </div>
+            <div>
+              <p class="float-left font-weight-bold">Score:&nbsp;
+                <span id='playerScore'>{{ mathgame.score }}</span>
+              </p>
+              <p class="float-right font-weight-bold">Time Left:&nbsp;
+                <span id="playerTime"></span></p>
+              <p>Time Left:&nbsp;
+                <span id="playerTime">{{ timer }}</span></p>
+            </div>
           {% block timer %}
             <script>
               const COUNTER_KEY = 'my-counter';

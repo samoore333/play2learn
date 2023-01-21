@@ -1,5 +1,4 @@
-window.addEventListener("keydown", function(e) {
-    if (e.key === 'Enter' || e.keycode === 13) {
+window.addEventListener("submit", function(e) {
 
         let number1 = document.getElementById('number1').innerHTML;
         let number2 = document.getElementById('number2').innerHTML;
@@ -19,15 +18,15 @@ window.addEventListener("keydown", function(e) {
             answer = num1 / num2;
         }
 
-        let score = + document.getElementById('score').innerHTML;
+        let score = + document.getElementById('playerScore').innerHTML;
 
         if (value == answer) {
             score+=1;
-            document.getElementById('score').innerHTML = score;
+            document.getElementById('playerScore').innerHTML = score;
+            register(score)
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }
-    }
 })
 
 function register(score) {

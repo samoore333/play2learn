@@ -25,5 +25,4 @@ class MathgameForm(ModelForm):
 class MathgamePlayForm(ModelForm):
     class Meta:
         model = Mathgame
-        fields = []
-        
+        fields = []       
