@@ -26,7 +26,6 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
-    score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
@@ -45,3 +44,16 @@ class Mathgame(models.Model):
     
     def __int__(self):
         return self.max_number
+
+class MathgameScore(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        related_name='mathgamescore'      
+    )
+    mathgame = models.ForeignKey(
+        Mathgame, on_delete=models.CASCADE,
+        related_name='mathgamescore'
+    )
+    score = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
