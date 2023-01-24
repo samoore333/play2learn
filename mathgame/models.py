@@ -28,6 +28,10 @@ class Mathgame(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def num_score(self):
+        return self.mathgamescore.count()
     
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
@@ -54,6 +58,6 @@ class MathgameScore(models.Model):
         Mathgame, on_delete=models.CASCADE,
         related_name='mathgamescore'
     )
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

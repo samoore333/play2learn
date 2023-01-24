@@ -3,7 +3,7 @@
 {% load math_facts %}
 {% load crispy_forms_tags %}
 
-{% block javascript %}
+{% block javascript %} 
   <script src="{% static 'js/mathgame2.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
@@ -92,15 +92,13 @@
               </div>
               </div>
           {% endblock %}
-            <div>
-              <p class="float-left font-weight-bold">Score:&nbsp;
-                <span id='playerScore'>{{ mathgame.score }}</span>
-              </p>
-              <p class="float-right font-weight-bold">Time Left:&nbsp;
-                <span id="playerTime"></span></p>
-              <p>Time Left:&nbsp;
-                <span id="playerTime">{{ timer }}</span></p>
-            </div>
+            <p class="float-left font-weight-bold">Score:&nbsp;
+              <span id='playerScore'>0</span>
+            </p>
+            <div id="output" class="text-info"></div>
+            <p class="float-right font-weight-bold">Time Left:&nbsp;
+              <span id="playerTime"></span>
+            </p>
           {% block timer %}
             <script>
               const COUNTER_KEY = 'my-counter';

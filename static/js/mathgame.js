@@ -21,8 +21,9 @@ window.addEventListener("keydown", function(e) {
         }
 
         if (value == answer) {
-            document.getElementById('playerScore').innerHTML =+1;
-            score.save()
+            score+=1;
+            document.getElementById('playerScore').innerHTML=score;
+            
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }
