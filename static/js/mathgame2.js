@@ -8,7 +8,7 @@ window.addEventListener("keydown", function(e) {
         let operator = document.getElementById('operator').innerHTML;
         let userAnswer = document.getElementById('tbInput');
         let value = userAnswer.value;
-        let correct = + this.document.getElementById('playerScore').innerHTML;
+        const scores = document.getElementById('playerScore');
         
         if (operator == '+') {
             answer = num1 + num2;
@@ -21,26 +21,48 @@ window.addEventListener("keydown", function(e) {
         }
         
         if (value == answer) {
-            correct+=1;
-            document.getElementById('playerScore').innerHTML = correct;
-        } else {
-            alert('You are incorrect, the answer was ' + answer);
-        }
-        
-        function register() {
-            const score = Number(document.getElementById('playerScore').innerHTML);
+            scores = Number(document.getElementById('playerScore').innerHTML+=1);
+            const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+            const csrfToken = csrfInput.value;
             const data = {
-            'score': score,
+                'scores': scores,
             }
-        
-            fetch(ajaxURL, {
+            $(ajaxURL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify(data),
             })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('playerScore').innerHTML = data.scores;
+                });
+            } else {
+                alert('You are incorrect, the answer was ' + answer);
         }
     }
-});
+})
+
+function register(scores) {
+    const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+    const csrfToken = csrfInput.value;
+    const num_scores = Number(document.getElementById('playerScore').innerHTML);
+    const data = {
+        'scores': scores,
+        'num_scores': num_scores
+    }
+    fetch(ajaxURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('playerScore').innerHTML = data.num_scores;
+        });
+}

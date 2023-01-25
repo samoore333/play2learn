@@ -3,8 +3,8 @@
 {% load math_facts %}
 {% load crispy_forms_tags %}
 
-{% block javascript %} 
-  <script src="{% static 'js/mathgame2.js' %}"></script>
+{% block javascript %}
+  <script src="{% static 'js/mathgame.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
@@ -93,7 +93,7 @@
               </div>
           {% endblock %}
             <p class="float-left font-weight-bold">Score:&nbsp;
-              <span id='playerScore'>0</span>
+              <span id='playerScore'>{{ mathgame.score }}</span>
             </p>
             <div id="output" class="text-info"></div>
             <p class="float-right font-weight-bold">Time Left:&nbsp;

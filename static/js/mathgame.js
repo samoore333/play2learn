@@ -28,4 +28,5 @@ window.addEventListener("keydown", function(e) {
             alert('You are incorrect, the answer was ' + answer);
         }
     }
+    return score;
 })

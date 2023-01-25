@@ -31,13 +31,13 @@ def playerScore(request, slug):
     mathgame = Mathgame.objects.get(slug=slug)
     data = json.loads(request.body)
 
-    score = data['score']
+    scores = data['scores']
 
-    mathgame_score = MathgameScore(user=user, mathgame=mathgame, score=score)
+    mathgame_score = MathgameScore(user=user, mathgame=mathgame, scores=scores)
     mathgame_score.save()
 
     response = {
-        'score': score
+        'scores': scores,
     }
 
     return JsonResponse(response)

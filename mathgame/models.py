@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Sum
 from django.urls import reverse
 
 from common.utils.text import unique_slug
@@ -26,13 +27,10 @@ class Mathgame(models.Model):
     slug = models.SlugField(
         max_length=50, unique=True, null=False, editable=False
     )
+    score = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    @property
-    def num_score(self):
-        return self.mathgamescore.count()
-    
     def get_absolute_url(self):
         return reverse('mathgame:play', args=[self.slug])
 
@@ -42,12 +40,13 @@ class Mathgame(models.Model):
             self.slug = unique_slug(value, type(self))
 
         super().save(*args, **kwargs)
+    
 
     def __str__(self):
         return self.operation
     
     def __int__(self):
-        return self.max_number
+        return self.max_number  
 
 class MathgameScore(models.Model):
     user = models.ForeignKey(
@@ -58,6 +57,6 @@ class MathgameScore(models.Model):
         Mathgame, on_delete=models.CASCADE,
         related_name='mathgamescore'
     )
-    score = models.IntegerField(default=0)
+    scores = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
