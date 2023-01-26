@@ -1,6 +1,5 @@
 import random
 from django import template
-from mathgame.models import Mathgame
 
 register = template.Library()
 

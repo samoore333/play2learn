@@ -11,7 +11,7 @@ class ReviewsForm(ModelForm):
             'first_name': forms.TextInput(attrs={'autofocus': True}),
             'last_name': forms.TextInput(),
             'email': forms.EmailInput(),
-            'message': forms.Textarea(
-                attrs={'cols': 75, 'rows': 5}
+            'comment': forms.Textarea(
+                attrs={'cols': 75, 'rows': 4}
             )
         }

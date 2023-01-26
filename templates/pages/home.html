@@ -1,6 +1,6 @@
 {% extends "_base.html" %}
 {% load static %}
-
+{% load reviews %}
 {% block title %}Home{% endblock %}
 {% block main %}
 <div class="container-fluid p-1">
@@ -12,16 +12,9 @@
       <div id="myquotes" class="carousel" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <p>"I have never had more fun than I do playing Anagram Hunt.
-              It is the best game ever invented!" -- Justin Jess</p>
+            <p>{% appReviews %}</p>
           </div>
-          <div class="carousel-item">
-            <p>"I have learned a lot from these games!" -- Jenny</p>
-          </div>
-          <div class="carousel-item">
-            <p>"Great work, thank you!" -- anonymous</p>
-          </div>
-      </div>
+        </div>
     </div>
   </div>
 </div>

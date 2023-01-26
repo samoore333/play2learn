@@ -1,5 +1,5 @@
-from django.contrib import messages
 from django.views.generic import TemplateView
+from reviews.models import Review
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
