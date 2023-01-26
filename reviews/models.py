@@ -6,6 +6,7 @@ class Review(models.Model):
     email = models.EmailField(blank=True)
     comment = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.comment
