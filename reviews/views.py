@@ -1,12 +1,13 @@
 import html
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView
+from django.views.generic import CreateView, TemplateView
 
 from common.utils.email import send_email
+from .models import Review
 from .forms import ReviewsForm
 
-class ReviewsAppView(FormView):
-    template_name = 'reviews/reviews.html'
+class ReviewsAppView(CreateView):
+    model = Review
     form_class = ReviewsForm
     success_url = reverse_lazy('reviews:thanks')
 

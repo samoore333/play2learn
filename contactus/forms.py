@@ -1,12 +1,18 @@
+from django.forms import ModelForm
 from django import forms
 
-class ContactUsForm(forms.Form):
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'autofocus': True})
-    )
-    last_name = forms.CharField()
-    email = forms.EmailField()
-    subject = forms.CharField()
-    message = forms.CharField(
-        widget=forms.Textarea(attrs={'cols': '75', 'rows': '5'})
-    )
+from .models import Contact
+
+class ContactUsForm(ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['first_name', 'last_name', 'email', 'subject', 'message']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'autofocus': True}),
+            'last_name': forms.TextInput(),
+            'email': forms.EmailInput(),
+            'subject': forms.TextInput(),
+            'message': forms.Textarea(
+                attrs={'cols': 75, 'rows': 5}
+            )
+        }

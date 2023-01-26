@@ -23,10 +23,25 @@ window.addEventListener("keydown", function(e) {
         if (value == answer) {
             score+=1;
             document.getElementById('playerScore').innerHTML=score;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://reqbin.com/echo/post/json");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+            }};
+
+            let data = `{
+            "score": score,
+            }`;
+
+            xhr.send(data);
             
         } else {
             alert('You are incorrect, the answer was ' + answer);
         }
     }
-    return score;
 })

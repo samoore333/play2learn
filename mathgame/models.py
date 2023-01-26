@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from django.db.models import Sum
 from django.urls import reverse
 
 from common.utils.text import unique_slug

@@ -1,11 +1,17 @@
+from django.forms import ModelForm
 from django import forms
 
-class ReviewsForm(forms.Form):
-    first_name = forms.CharField(
-        widget=forms.TextInput(attrs={'autofocus': True})
-    )
-    last_name = forms.CharField()
-    email = forms.EmailField()
-    comment = forms.CharField(
-        widget=forms.Textarea(attrs={'cols': '75', 'rows': '5'})
-    )
+from .models import Review
+
+class ReviewsForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['first_name', 'last_name', 'email', 'comment']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'autofocus': True}),
+            'last_name': forms.TextInput(),
+            'email': forms.EmailInput(),
+            'message': forms.Textarea(
+                attrs={'cols': 75, 'rows': 5}
+            )
+        }

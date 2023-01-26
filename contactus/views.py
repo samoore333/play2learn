@@ -1,12 +1,13 @@
 import html
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView
+from django.views.generic import CreateView, TemplateView
 
 from common.utils.email import send_email
+from .models import Contact
 from .forms import ContactUsForm
 
-class ContactUsAppView(FormView):
-    template_name = 'contact/contact_us.html'
+class ContactUsAppView(CreateView):
+    model = Contact
     form_class = ContactUsForm
     success_url = reverse_lazy('contactus:thanks')
 
@@ -27,4 +28,4 @@ class ContactUsAppView(FormView):
         return super().form_valid(form)
 
 class ContactUsThanksView(TemplateView):
-    template_name = 'contact/thanks.html'
+    template_name = 'contactus/thanks.html'
