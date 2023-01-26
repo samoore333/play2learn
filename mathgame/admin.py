@@ -1,20 +1,22 @@
 from django.contrib import admin
 
+from common.admin import Play2LearnAdmin
+
 from .models import Mathgame, MathgameScore
 
 @admin.register(Mathgame)
-class MathgameAdmin(admin.ModelAdmin):
+class MathgameAdmin(Play2LearnAdmin):
     model = Mathgame
-    list_display = ['score', 'operation', 'max_number', 'updated']
+    list_display = ['operation', 'max_number', 'score', 'updated']
 
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
-            return ('updated')
+            return ('updated',)
 
         return ()
 
 @admin.register(MathgameScore)
-class MathgameScoreAdmin(admin.ModelAdmin):
+class MathgameScoreAdmin(Play2LearnAdmin):
     model = MathgameScore
     list_display = ['mathgame', 'user', 'scores']
 

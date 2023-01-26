@@ -9,5 +9,5 @@ class Contact(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.message
+        return f'{self.first_name}, {self.last_name}, ({self.message})'
 
