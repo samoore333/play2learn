@@ -11,5 +11,5 @@ urlpatterns = [
     path('mathgame/start/', MathgameCreateView.as_view(), name='start'),
     path('mathgame/<slug>/score/', playerScore, name='ajax-score'),
     path('mathgame/<slug>/', MathgameDetailView.as_view(), name='detail'),
-    path('mathgame/leaderboard/', MathgameListView.as_view(), name='leaders'),
+    path('', MathgameListView.as_view(), name='leaders'),
 ]
