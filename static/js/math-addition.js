@@ -7,20 +7,6 @@ window.addEventListener('load', function math() {
     document.getElementById('number1').innerHTML=number1;
     document.getElementById('number2').innerHTML=number2;
     document.getElementById('tbInput').focus();
-    const additionEnd = document.getElementById('additionEnd');
-    const additionGame = document.getElementById('additionGame');
-    
-    let timeleft = 30;
-    let gameTimer = + this.setInterval(function(){
-        if(timeleft <= 0){
-            clearInterval(gameTimer);
-            $("#additionEnd").modal();
-        } else {
-            document.getElementById("playerTime").innerHTML = timeleft + " seconds remaining";  
-        }
-        timeleft -= 1;
-    }, 1000);
-
 
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {
@@ -30,14 +16,11 @@ window.addEventListener("keydown", function(e) {
     const checkAnswer = document.getElementById('tbInput');
     const value = checkAnswer.value;
     let playerScore = + this.document.getElementById('playerScore').innerHTML;
-    let finalScore = + this.document.getElementById('playerScore').innerHTML;
     
 
     if (value == answer) {
           playerScore+=1;
-          finalScore+=1;
           document.getElementById("playerScore").innerHTML=playerScore;
-          document.getElementById("finalScore").innerHTML=finalScore;
        
     } else {
           alert('You are incorrect, the answer was ' + answer);

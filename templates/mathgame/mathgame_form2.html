@@ -4,23 +4,25 @@
 {% load crispy_forms_tags %}
 
 {% block javascript %}
-  <script src="{% static 'js/math-addition.js' %}"></script>
+  <script src="{% static 'js/mathgame.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
   <div id="start" class="card border-info m-auto p-3 bg-light"
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
-    
+    <form method="post" action="">
+      {% csrf_token %}
+      {{ form|crispy }}
       {% if 'play' in request.path %}
         <div id="operation" class="card-header font-weight-bold text-center">
           {{ mathgame.get_operation_display }}</div>
           <br>
           {% if mathgame.operation == '+' %}
             <h1 class="text-center">
-              <span id='number1'>1</span>
+              <span id="number1">{% randNum 1 mathgame.max_number %}</span>
               <span id="operator">+</span> 
-              <span id='number2'>2</span>
+              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
             </h1>
           {% endif %}
           {% if mathgame.operation == '-' %}
@@ -88,38 +90,49 @@
                 <input class="btn btn-info pl-2 pr-2" type="button" value="Clear" onclick="del();" />
                 <input class="btn btn-info pl-3 pr-3" type="submit" value="Enter"/>
               </div>
-            </div>
+              </div>
           {% endblock %}
-            <div class="row justify-content-between">
-              <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                <span id='playerScore'>{{ mathgame.score }}</span>
-              </p>
-              <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
-                <span id="playerTime">30</span>
-              </p>
-            </div>
-            {% block timer %}
-              <script>
-                let timeleft = 29;
-                let gameTimer = + this.setInterval(function(){
-                    if(timeleft <= 0){
-                      clearInterval(gameTimer);
-                      window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
-                    } else {
-                        document.getElementById("playerTime").innerHTML = timeleft;  
-                    }
-                    timeleft -= 1;
+            <p class="float-left font-weight-bold">Score:&nbsp;
+              <span id='playerScore'>{{ mathgame.score }}</span>
+            </p>
+            <p class="float-right font-weight-bold">Time Left:&nbsp;
+              <span id="playerTime"></span>
+            </p>
+          {% block timer %}
+            <script>
+              const COUNTER_KEY = 'my-counter';
+
+              function countDown(i, callback) {
+                //callback = callback || function(){};
+                timer = setInterval(function() {
+                  seconds = parseInt(i % 60, 10);
+                  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                  if ((i--) > 0) {
+                    document.getElementById("playerTime").innerHTML = seconds;
+                    window.sessionStorage.setItem(COUNTER_KEY, i);
+                  } else {
+                    window.sessionStorage.removeItem(COUNTER_KEY);
+                    clearInterval(timer);
+                    callback();
+                    window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+                  }
                 }, 1000);
-              </script>
-            {% endblock %}
+              }
+
+              window.onload = function() {
+                let countDownTime = window.sessionStorage.getItem(COUNTER_KEY) || 30;
+                countDown(countDownTime, function() {
+                  $('#myModal').modal('show');
+                });
+              };
+            </script>
+          {% endblock %}
         </div>
       {% endif %}
-      <form method="post" action="">
-        {% csrf_token %}
-        {{ form|crispy }}
       {% if 'start' in request.path %}
           <button class="btn btn-info btn-block">Go</button>
-      </form>
+    </form>
         <br>
         <ol>
             <li>Select operation.</li>
