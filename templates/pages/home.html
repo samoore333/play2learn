@@ -9,12 +9,20 @@
       <h4 class="pl-5">Happy Users Say&hellip;</h4>
     </div>
     <div class="col-sm-9 pt-1 text-warning font-weight-bold font-italic">
-      <div id="myquotes" class="carousel" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <p>{% appReviews %}</p>
+      <div class="carousel-inner" data-ride="carousel">
+        {% appReviews as reviewList %}
+        {% for review in reviewList %}
+          {% if forloop.first %}
+            <div class="carousel-item active">
+              <p>{{ review }}</p>
+            </div>
+          {% else %}
+          <div class="carousel-item">
+            <p>{{ review }}</p>
           </div>
-        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>

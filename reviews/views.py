@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
 
 from common.utils.email import send_email
+from django.shortcuts import render
 from .models import Review
 from .forms import ReviewsForm
 
@@ -30,3 +31,13 @@ class ReviewsAppView(CreateView):
 
 class ReviewsAppThanksView(TemplateView):
     template_name = 'reviews/thanks.html'
+
+def appReviews(request):
+    reviews = Review.objects.filter(approved=True)
+    comment = reviews.filter('comment')
+    first = reviews.filter('first_name')
+    context = {
+        'comment': comment,
+        'first': first
+    }
+    return render(request, 'pages/home.html', context=context)
