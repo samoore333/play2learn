@@ -9,7 +9,7 @@
       <h4 class="pl-5">Happy Users Say&hellip;</h4>
     </div>
     <div class="col-sm-9 pt-1 text-warning font-weight-bold font-italic">
-      <div class="carousel-inner" data-ride="carousel">
+      <div class="carousel-inner" data-ride="carousel" data-interval="3000">
         {% appReviews as reviewList %}
         {% for review in reviewList %}
           {% if forloop.first %}
