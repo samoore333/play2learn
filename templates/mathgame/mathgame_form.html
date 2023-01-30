@@ -15,35 +15,14 @@
       {% if 'play' in request.path %}
         <div id="operation" class="card-header font-weight-bold text-center">
           {{ mathgame.get_operation_display }}</div>
-          <br>
-          {% if mathgame.operation == '+' %}
-            <h1 class="text-center">
-              <span id='number1'>1</span>
-              <span id="operator">+</span> 
-              <span id='number2'>2</span>
-            </h1>
-          {% endif %}
-          {% if mathgame.operation == '-' %}
-            <h1 class="text-center">
-              <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
-              <span id="operator">-</span>
-              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-            </h1>
-          {% endif %}
-          {% if mathgame.operation == '*' %}
-            <h1 class="text-center">
-              <span id="number1">{% randNum 1 mathgame.max_number %}</span>
-              <span id="operator">x</span>
-              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-            </h1>
-          {% endif %}
-          {% if mathgame.operation == '/' %}
-            <h1 class="text-center">
-              <span id="number1">{% randNum mathgame.max_number mathgame.max_number %}</span>
-              <span id="operator">/</span>
-              <span id="number2">{% randNum 1 mathgame.max_number %}</span>
-            </h1>
-          {% endif %}
+        <p class="text-center">Max Number
+          <span id="max">{{ mathgame.max_number }}</span>
+        </p>
+          <h1 class="text-center">
+            <span id='number1'></span>
+            <span id='operator'>{{ mathgame.operation }}</span> 
+            <span id='number2'></span>
+          </h1>
           {% block input %}
             <script>
               function input(e) {
