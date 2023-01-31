@@ -2,21 +2,83 @@
 
 {% block title %}Math Facts Leaderboard{% endblock %}
 {% block main %}
-  <a class="btn btn-info btn-sm float-right" href="{% url 'mathgame:start' %}">
-    Play Game
-  </a>
-  <h2>Math Facts Leaderboard</h2>
+  <div class="row">
+    <div class="col-12 col-md-2 col-lg-3">
+      <h2>Math Facts Leaderboard</h2>
+    </div>
+    <div class="col-12 col-md-8 col-lg-6">
+      <form class="form-inline my-2 mx-auto" style="max-width: 30rem;">
+        <label class="my-1 mr-2" for="order">Order By:</label>
+        <select class="form-control mr-sm-2" name="order" id="order">
+          {% for field in order_fields %}
+            <option value="{{ field }}"
+              {% if order == field %}selected{% endif %}
+            >{{ field|title }}</option>
+          {% endfor %}
+        </select>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="direction" 
+            id="asc" value="asc"
+            {% if direction == 'asc' %}checked{% endif %}
+          >
+          <label class="form-check-label" for="asc">ASC</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="direction"
+            id="desc" value="desc"
+            {% if direction == 'desc' %}checked{% endif %}
+          >
+          <label class="form-check-label" for="desc">DESC</label>
+        </div>
+        <button class="btn btn-primary btn-sm m-2" type="submit">
+          Sort
+        </button>
+      </form>
+    </div>
+    <div class="col-12 col-md-2 col-lg-3 text-right">
+      <a class="btn btn-info btn-sm float-right" href="{% url 'mathgame:start' %}">
+        Play Game
+      </a>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-striped" style="min-width: 500px">
       <thead>
-        <tr>
-          <th>Date</th>
-          <th>Game</th>
-          <th>Operation</th>
-          <th>Max Number</th>
-          <th>Username</th>
-          <th>Score</th>
-        </tr>
+        {% with order=request.GET.order dir=request.GET.direction %}
+          <tr>
+            {% if request.GET.order == 'updated' and request.GET.direction == 'asc' %}
+            <th><a href="?order=updated&direction=desc&q={{ request.GET.q }}">Date</a></th>
+            {% else %}
+            <th><a href="?order=updated&direction=asc&q={{ request.GET.q }}">Date</a></th>
+            {% endif %}
+            {% if request.GET.order == 'category' and request.GET.direction == 'asc' %}
+            <th><a href="?order=category&direction=desc&q={{ request.GET.q }}">Game</a></th>
+            {% else %}
+            <th><a href="?order=category&direction=asc&q={{ request.GET.q }}">Game</a></th>
+            {% endif %}
+            {% if request.GET.order == 'operation' and request.GET.direction == 'asc' %}
+            <th><a href="?order=operation&direction=desc&q={{ request.GET.q }}">Operation</a></th>
+            {% else %}
+            <th><a href="?order=operation&direction=asc&q={{ request.GET.q }}">Operation</a></th>
+            {% endif %}
+            {% if request.GET.order == 'max' and request.GET.direction == 'asc' %}
+            <th><a href="?order=max&direction=desc&q={{ request.GET.q }}">Max Number</a></th>
+            {% else %}
+            <th><a href="?order=max&direction=asc&q={{ request.GET.q }}">Max Number</a></th>
+            {% endif %}
+            {% if request.GET.order == 'creator' and request.GET.direction == 'asc' %}
+            <th><a href="?order=creator&direction=desc&q={{ request.GET.q }}">User</a></th>
+            {% else %}
+            <th><a href="?order=creator&direction=asc&q={{ request.GET.q }}">User</a></th>
+            {% endif %}
+            {% if request.GET.order == 'score' and request.GET.direction == 'asc' %}
+            <th><a href="?order=score&direction=asc&q={{ request.GET.q }}">Score</a></th>
+            {% else %}
+            <th><a href="?order=score&direction=desc&q={{ request.GET.q }}">Score</a></th>
+            {% endif %}
+          </tr>
+        {% endwith %}
       </thead>
       <tbody>
         {% for mathgame in mathgame_list %}
