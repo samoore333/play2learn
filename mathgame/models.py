@@ -45,7 +45,10 @@ class Mathgame(models.Model):
         return self.operation
     
     def __int__(self):
-        return self.max_number  
+        return self.max_number
+    
+    def __int__(self):
+        return self.score
 
 class MathgameScore(models.Model):
     user = models.ForeignKey(

@@ -2,7 +2,7 @@ import json
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from .models import Mathgame, MathgameScore
+from .models import Mathgame
 from .forms import MathgameForm, MathgamePlayForm
 
 class MathgameCreateView(CreateView):
@@ -25,20 +25,18 @@ class MathgameUpdateView(UpdateView):
     model = Mathgame
     form_class = MathgamePlayForm
 
-def playerScore(request, slug):
+def score(request, slug):
     user = request.user
     mathgame = Mathgame.objects.get(slug=slug)
     data = json.loads(request.body)
 
-    scores = data['scores']
+    score = data['score']
 
-    mathgame_score = MathgameScore(user=user, mathgame=mathgame, scores=scores)
+    mathgame_score = Mathgame(user=user, mathgame=mathgame, score=score)
     mathgame_score.save()
 
     response = {
-        'scores': scores,
+        'score': score,
     }
 
     return JsonResponse(response)
-
-

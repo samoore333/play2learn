@@ -1,47 +1,86 @@
+window.addEventListener('load', function math() {
+    let number1;
+    let number2;
+
+    operator = document.getElementById('operator').innerHTML;
+    max = Number(document.getElementById('max').innerHTML);
+
+    if (operator == '+') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+    } else if (operator == '-') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+        if (number2 > number1) {
+                number2 = number1
+                number1 = number2
+        }
+    } else if (operator == '*') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+    } else {
+        number2 = Math.floor((Math.random() * max) + 1);
+        numberx = Math.floor((Math.random() * max) + 1);
+        number1 = number2 * numberx
+    }
+
+    document.getElementById('number1').innerHTML=number1;
+    document.getElementById('number2').innerHTML=number2;
+    document.getElementById('tbInput').focus();
+
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {
-        
-        let number1 = document.getElementById('number1').innerHTML;
-        let number2 = document.getElementById('number2').innerHTML;
-        let num1 = Number(number1);
-        let num2 = Number(number2);  
-        let operator = document.getElementById('operator').innerHTML;
-        const checkAnswer = document.getElementById('tbInput');
-        const value = checkAnswer.value;
-        let score = + this.document.getElementById('playerScore').innerHTML;
 
-        if (operator == '+') {
-            answer = num1 + num2;
-        } else if (operator == '-') {
-            answer = num1 - num2;
-        } else if (operator == 'x') {
-            answer = num1 * num2;
-        } else {
-            answer = num1 / num2;
-        }
-
-        if (value == answer) {
-            score+=1;
-            document.getElementById('playerScore').innerHTML=score;
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST", "https://reqbin.com/echo/post/json");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-            }};
-
-            let data = `{
-            "score": score,
-            }`;
-
-            xhr.send(data);
-            
-        } else {
-            alert('You are incorrect, the answer was ' + answer);
-        }
+    if (operator == '+') {
+        answer = number1 + number2;
+    } else if (operator == '-') {
+        answer = number1 - number2;
+    } else if (operator == '*') {
+        answer = number1 * number2;
+    } else {
+        answer = number1 / number2;
     }
-})
+
+    const checkAnswer = document.getElementById('tbInput');
+    const value = checkAnswer.value;
+    let playerScore = + this.document.getElementById('playerScore').innerHTML;
+    
+
+    if (value == answer) {
+          playerScore+=1;
+          document.getElementById("playerScore").innerHTML=playerScore;
+          
+    } else {
+          alert('You are incorrect, the answer was ' + answer);
+    }
+
+    document.querySelector('input[type=text]').value = "";               
+    document.getElementById('number1').innerHTML = "";
+    document.getElementById('number2').innerHTML = ""; 
+    if (operator == '+') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+    } else if (operator == '-') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+        if (number2 > number1) {
+                number2 = number1
+                number1 = number2
+        }
+    } else if (operator == '*') {
+        number1 = Math.floor((Math.random() * max) + 1);
+        number2 = Math.floor((Math.random() * max) + 1);
+    } else {
+        number2 = Math.floor((Math.random() * max) + 1);
+        numberx = Math.floor((Math.random() * max) + 1);
+        number1 = number2 * numberx
+    }
+    document.getElementById('number1').innerHTML = number1; 
+    document.getElementById('number2').innerHTML = number2;
+    document.getElementById('tbInput').focus();
+
+    }
+});
+});
+
+

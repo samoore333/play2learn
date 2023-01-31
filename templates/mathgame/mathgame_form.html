@@ -4,14 +4,19 @@
 {% load crispy_forms_tags %}
 
 {% block javascript %}
-  <script src="{% static 'js/math-addition.js' %}"></script>
+  <script src="{% static 'js/mathgame.js' %}"></script>
+{% endblock %}
+{% block ajax %}
+  <script>
+    const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
+  </script>
+  <script src="{% static 'js/ajax.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
   <div id="start" class="card border-info m-auto p-3 bg-light"
     style="max-width: 30rem">
     <h1 class="text-center">Math Facts Practice</h1>
-    
       {% if 'play' in request.path %}
         <div id="operation" class="card-header font-weight-bold text-center">
           {{ mathgame.get_operation_display }}</div>
@@ -73,6 +78,7 @@
               <p class="float-left font-weight-bold pl-3">Score:&nbsp;
                 <span id='playerScore'>{{ mathgame.score }}</span>
               </p>
+              </form>
               <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
                 <span id="playerTime">30</span>
               </p>
@@ -107,5 +113,6 @@
         </ol>
         <p class="font-weight-bold text-center text-uppercase text-warning">How many problems can you solve in 30 seconds?</p>
       {% endif %}
+    </div>
   </div>
 {% endblock %}
