@@ -1,0 +1,73 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block javascript %}
+  <script src=""></script>
+{% endblock %}
+{% block title %}Anagram Hunt{% endblock %}
+{% block main %}
+  <div id="start" class="card border-info m-auto p-3 bg-light"
+    style="max-width: 30rem">
+    <h1 class="text-center">Anagram Hunt</h1>
+      {% if 'play' in request.path %}
+        <div id="wordlength" class="card-header font-weight-bold text-center">
+          Word Length: {{ anagramgame.word_length }}
+        </div>
+        <br>
+        <div>
+          <p class="float-left font-weight-bold pl-3">Score:&nbsp;
+            <span id='playerScore'>{{ anagramgame.score }}</span>
+          </p>
+          <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
+            <span id="playerTime">60</span>
+          </p>
+          <br>
+          <hr>
+        </div>
+        {% block timer %}
+          <script>
+            let timeleft = 59;
+            let gameTimer = + this.setInterval(function(){
+                if(timeleft <= 0){
+                  clearInterval(gameTimer);
+                  window.location.href = "{% url 'anagram:detail' anagramgame.slug %}"
+                } else {
+                    document.getElementById("playerTime").innerHTML = timeleft;  
+                }
+                timeleft -= 1;
+            }, 1000);
+          </script>
+        {% endblock %}
+        <h1 class="text-center">
+          <span id='anagram'>beard</span>
+          <span id='operator'>(2 left)</span> 
+        </h1>
+        {% block input %}
+          <div class="row justify-content-center">
+            <div class="form-group col-sm-3">
+              <input class="form-control border-dark" id="answer" name="answer" type="text" autofocus>
+            </div>
+          </div>
+        {% endblock %}
+        <br>
+        <ol>
+          <li>bread</li>
+        </ol>
+      {% endif %}
+      <form method="post" action="">
+        {% csrf_token %}
+        {{ form|crispy }}
+      {% if 'start' in request.path %}
+          <button class="btn btn-info btn-block">Play!</button>
+      </form>
+        <br>
+        <ol>
+            <li>Choose Word Length.</li>
+            <li>Press <strong>Play!.</strong></li>
+        </ol>
+        <p class="font-weight-bold text-center text-uppercase text-warning">How many anagrams can you find in a minute?</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

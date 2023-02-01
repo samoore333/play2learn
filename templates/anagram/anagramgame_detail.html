@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block title %}Math Facts Practice{% endblock %}
+{% block main %}
+  <div class="card border-info m-auto mb-3 text-center"
+    style="max-width: 30rem">
+    <h1>Anagram Hunt</h1>
+    <div class="card-header font-weight-bold">{{ anagramgame.get_word_length_display }}</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title text-warning font-weight-bold">Times Up!</h5>
+    </div>
+    <div class="card-footer">
+      <h1>Your final score is:</h1>
+      <h1 class="font-weight-bolder" id='playerScore'>{{ anagramgame.score }}</h1>
+      <br>
+      <small class="text-muted">
+        Date: {{ anagramgame.updated }}
+        User: {{ anagramgame.user.username }}
+      </small>
+    </div>
+    <a class="btn btn-info" href="{% url 'anagram:start' %}">Play Again</a>
+  </div>
+{% endblock %}

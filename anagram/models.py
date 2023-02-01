@@ -5,19 +5,30 @@ from django.urls import reverse
 from common.utils.text import unique_slug
 
 class Anagramgame(models.Model):
-    WORD_LENGTH_CHOICES = [
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-    ]
-    word_length = models.CharField(max_length=1, choices=WORD_LENGTH_CHOICES,
-    default=5)
-    score = models.IntegerField()
-    end_time = models.DateTimeField(auto_now_add=True)
+    category = models.CharField(max_length=50, default='Anagram Hunt')
+    word_length = models.IntegerField(default=5)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT
     )
+    slug = models.SlugField(
+        max_length=50, unique=True, null=False, editable=False
+    )
+    score = models.IntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def get_absolute_url(self):
+        return reverse('anagram:play', args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            value = str(self)
+            self.slug = unique_slug(value, type(self))
+
+        super().save(*args, **kwargs)
+    
+    def __int__(self):
+        return self.word_length
+
+    def __int__(self):
         return self.score

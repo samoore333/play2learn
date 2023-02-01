@@ -1,8 +1,14 @@
 from django.urls import path
-from .views import AnagramHuntView, AnagramListView
+
+from .views import (
+    AnagramgameCreateView, AnagramgameDetailView, AnagramgameListView,
+     AnagramgameUpdateView
+)
 
 app_name = 'anagram'
 urlpatterns = [
-    path('', AnagramListView.as_view(), name='list'),
-    path('anagram-hunt/', AnagramHuntView.as_view(), name='anagram-hunt'),
+    path('anagram/<slug>/play/', AnagramgameUpdateView.as_view(), name='play'),
+    path('anagram/start/', AnagramgameCreateView.as_view(), name='start'),
+    path('anagram/<slug>/', AnagramgameDetailView.as_view(), name='detail'),
+    path('', AnagramgameListView.as_view(), name='leaders'),
 ]
