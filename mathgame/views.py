@@ -67,8 +67,7 @@ class MathgameListView(LoginRequiredMixin, ListView):
         # Returns a dict mapping friendly names to field names and lookups.
         return {
             'updated': 'updated',
-            'category': 'category',
-            'operation': 'operation',
+            'game': 'operation',
             'max': 'max_number',
             'creator': 'user__username',
             'score': 'score',

@@ -3,10 +3,10 @@
 {% block title %}Math Facts Leaderboard{% endblock %}
 {% block main %}
   <div class="row">
-    <div class="col-12 col-md-2 col-lg-3">
+    <div class="col-12 col-md-4 col-lg-4">
       <h2>Math Facts Leaderboard</h2>
     </div>
-    <div class="col-12 col-md-8 col-lg-6">
+    <div class="col-12 col-md-6 col-lg-5">
       <form class="form-inline my-2 mx-auto" style="max-width: 30rem;">
         <label class="my-1 mr-2" for="order">Order By:</label>
         <select class="form-control mr-sm-2" name="order" id="order">
@@ -52,15 +52,10 @@
             {% else %}
             <th><a href="?order=updated&direction=asc&q={{ request.GET.q }}">Date</a></th>
             {% endif %}
-            {% if request.GET.order == 'category' and request.GET.direction == 'asc' %}
-            <th><a href="?order=category&direction=desc&q={{ request.GET.q }}">Game</a></th>
+            {% if request.GET.order == 'game' and request.GET.direction == 'asc' %}
+            <th><a href="?order=game&direction=desc&q={{ request.GET.q }}">Game</a></th>
             {% else %}
-            <th><a href="?order=category&direction=asc&q={{ request.GET.q }}">Game</a></th>
-            {% endif %}
-            {% if request.GET.order == 'operation' and request.GET.direction == 'asc' %}
-            <th><a href="?order=operation&direction=desc&q={{ request.GET.q }}">Operation</a></th>
-            {% else %}
-            <th><a href="?order=operation&direction=asc&q={{ request.GET.q }}">Operation</a></th>
+            <th><a href="?order=game&direction=asc&q={{ request.GET.q }}">Game</a></th>
             {% endif %}
             {% if request.GET.order == 'max' and request.GET.direction == 'asc' %}
             <th><a href="?order=max&direction=desc&q={{ request.GET.q }}">Max Number</a></th>
@@ -85,9 +80,6 @@
           <tr>
             <td>
               {{ mathgame.updated }}</a>
-            </td>
-            <td>
-              {{ mathgame.category }}
             </td>
             <td>
               {{ mathgame.get_operation_display }}
