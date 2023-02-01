@@ -70,7 +70,8 @@
           {% endblock %}
             <div class="row justify-content-between">
               <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                <span id='playerScore'>{{ mathgame.score }}</span>
+                {% csrf_token %}
+                <span id='playerScore'>0</span>
               </p>
               </form>
               <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
