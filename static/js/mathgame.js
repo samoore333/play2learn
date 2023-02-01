@@ -30,6 +30,7 @@ window.addEventListener('load', function math() {
 
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {
+    
 
     if (operator == '+') {
         answer = number1 + number2;
@@ -48,7 +49,7 @@ window.addEventListener("keydown", function(e) {
 
     if (value == answer) {
           playerScore+=1;
-          document.getElementById("playerScore").innerHTML=playerScore;
+          document.getElementById('playerScore').innerHTML=playerScore;
           
     } else {
           alert('You are incorrect, the answer was ' + answer);
@@ -82,5 +83,3 @@ window.addEventListener("keydown", function(e) {
     }
 });
 });
-
-

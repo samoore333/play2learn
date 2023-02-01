@@ -6,12 +6,6 @@
 {% block javascript %}
   <script src="{% static 'js/mathgame.js' %}"></script>
 {% endblock %}
-{% block ajax %}
-  <script>
-    const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
-  </script>
-  <script src="{% static 'js/ajax.js' %}"></script>
-{% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
   <div id="start" class="card border-info m-auto p-3 bg-light"

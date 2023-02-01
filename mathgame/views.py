@@ -1,7 +1,6 @@
-import json
+from django.http import HttpResponse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
 from .models import Mathgame
 from .forms import MathgameForm, MathgamePlayForm
 
@@ -81,11 +80,9 @@ class MathgameUpdateView(UpdateView):
     form_class = MathgamePlayForm
 
 def score(request, slug):
+    score = request.POST['score']
     user = request.user
     mathgame = Mathgame.objects.get(slug=slug)
-    data = json.loads(request.body)
-
-    score = data['score']
 
     mathgame_score = Mathgame(user=user, mathgame=mathgame, score=score)
     mathgame_score.save()
@@ -94,4 +91,4 @@ def score(request, slug):
         'score': score,
     }
 
-    return JsonResponse(response)
+    return HttpResponse(response)
