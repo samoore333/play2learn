@@ -20,7 +20,6 @@ class MathgameForm(ModelForm):
         help_texts = {
             'operation': 'Select operation.',
             'max_number': 'Enter max number between 1 and 100.',
-            'answer': 'Enter your answer.'
         }
 
 class MathgamePlayForm(ModelForm):

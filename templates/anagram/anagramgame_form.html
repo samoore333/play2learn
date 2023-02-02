@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block javascript %}
-  <script src=""></script>
+  <script src="{% static 'js/anagram.js' %}"></script>
 {% endblock %}
 {% block title %}Anagram Hunt{% endblock %}
 {% block main %}
@@ -40,8 +40,8 @@
           </script>
         {% endblock %}
         <h1 class="text-center">
-          <span id='anagram'>beard</span>
-          <span id='operator'>(2 left)</span> 
+          <span id='word'></span>
+          (<span id='left'>0</span>&nbsp;left) 
         </h1>
         {% block input %}
           <div class="row justify-content-center">
@@ -51,9 +51,11 @@
           </div>
         {% endblock %}
         <br>
-        <ol>
-          <li>bread</li>
-        </ol>
+        <div>
+          <ol>
+            <li id="list" class="col-12 mt-3"></li>
+          </ol>
+        </div>
       {% endif %}
       <form method="post" action="">
         {% csrf_token %}
