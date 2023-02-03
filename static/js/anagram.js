@@ -1,44 +1,51 @@
 window.addEventListener('load', function math() {
-    let anagram = this.anagram;
-    
+  
+   
+
     fetch('/static/json/anagrams.json')
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then(data => {
+            const anagrams = data.anagrams
+            let array = function(arr) {
+                if ( typeof(arr) == "object") {
+                    for (var i = 0; i < arr.length; i++) {
+                        array(arr[i]);
+                    }
+                }
+                else document.write(arr);
+            }
+            
+            array(anagrams);
+        })
     ;
-
-    const anagrams = JSON.parse()
-
-    for (anagram in anagrams) {
-        anagram5 = (anagrams['anagram5'])
-        anagram6 = (anagrams['anagram6'])
-        anagram7 = (anagrams['anagram7'])
-        anagram8 = (anagrams['anagram8'])
-    }
+    
+    anagram5 = anagrams['5']
 
     let anagram5 = this.anagram5[Math.floor(Math.random()*this.anagram5.length)];
-    let anagram6 = this.anagram6[Math.floor(Math.random()*this.anagram6.length)];
-    let anagram7 = this.anagram7[Math.floor(Math.random()*this.anagram7.length)];
-    let anagram8 = this.anagram8[Math.floor(Math.random()*this.anagram8.length)];
+    anagram6 = this.anagram6[Math.floor(Math.random()*this.anagram6.length)];
+    anagram7 = this.anagram7[Math.floor(Math.random()*this.anagram7.length)];
+    anagram8 = this.anagram8[Math.floor(Math.random()*this.anagram8.length)];
 
-    const wordLength = Number(document.getElementById('wordlength').innerHTML);
+    let anagram;
+    const wordLength = (document.getElementById('wordlength'));
 
     if (wordLength == 5) {
         anagram = anagram5
     } else if (wordLength == 6) {
-        anagram = anagram6
+        anagram = rand6
     } else if (wordLength == 7) {
-        anagram = anagram7
+        anagram = rand7
     } else {
-        anagram = anagram8   
+        anagram = rand8
     }
 
-    let word = this.anagram[Math.floor(Math.random()*this.anagram.length)];
-    let count = this.anagram.length - 1;
+    let word = anagram[Math.floor(Math.random()*anagram.length)];
+    let count = anagram.length - 1;
 
-    document.getElementById('word').innerHTML=word;
-    document.getElementById('left').innerHTML=count;
-    document.getElementById('answer').focus();
-    document.getElementById('list').innerHTML=list;
+    word = document.getElementById('word');
+    count = document.getElementById('left');
+    answer = document.getElementById('answer');
+    list = document.getElementById('list');
     list = []
 
 window.addEventListener("keydown", function(e) {
@@ -52,7 +59,7 @@ window.addEventListener("keydown", function(e) {
         document.getElementById('playerScore').innerHTML=playerScore;
         document.getElementById('answer').focus();
         this.list.push(answer);
-        count+=-1;
+        count+=1;
     }
     else if (correctAnswer.indexOf(answer) === -1 || question === answer) {
         alert('You already got that word or this is not a valid anagram.')
