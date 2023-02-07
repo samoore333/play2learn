@@ -1,6 +1,5 @@
 {
-  "anagrams":{
-    "5" : [
+    "anagram5" : [
       [
         "abets",
         "baste",
@@ -54,7 +53,7 @@
         "react"
       ]
     ],
-    "6" : [
+    "anagram6" : [
       [
         "arrest",
         "rarest",
@@ -90,7 +89,7 @@
         "stared"
       ]
     ],
-    "7" : [
+    "anagram7" : [
       [
         "allergy",
         "gallery",
@@ -123,7 +122,7 @@
         "stained"
       ]
     ],
-    "8" : [
+    "anagram8" : [
       [
         "parroted",
         "predator",
@@ -151,4 +150,3 @@
       ]
     ]
   }
-}

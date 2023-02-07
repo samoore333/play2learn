@@ -6,13 +6,13 @@ from common.utils.text import unique_slug
 
 class Anagramgame(models.Model):
     WORDLENGTH_CHOICES = [
-        (5, 5),
-        (6, 6),
-        (7, 7),
-        (8, 8),
+        ('5', '5'),
+        ('6', '6'),
+        ('7', '7'),
+        ('8', '8'),
     ]
     category = models.CharField(max_length=50, default='Anagram Hunt')
-    word_length = models.IntegerField(max_length=1, choices=WORDLENGTH_CHOICES, default=5)
+    word_length = models.CharField(max_length=3, choices=WORDLENGTH_CHOICES, default='5')
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT
     )

@@ -11,9 +11,10 @@
     style="max-width: 30rem">
     <h1 class="text-center">Anagram Hunt</h1>
       {% if 'play' in request.path %}
-        <div id="wordlength" class="card-header font-weight-bold text-center">
-          Word Length: {{ anagramgame.word_length }}
-        </div>
+        <p class="card-header font-weight-bold text-center">
+          Word Length: 
+          <span id="wordlength">{{ anagramgame.word_length }}</span>
+        </p>
         <br>
         <div>
           <p class="float-left font-weight-bold pl-3">Score:&nbsp;

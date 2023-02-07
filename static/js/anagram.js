@@ -1,45 +1,33 @@
-window.addEventListener('load', function math() {
-  
-   
+window.addEventListener('load', function anagram() {
+    let anagram;
+    wordLength = document.getElementById('wordLength');
 
     fetch('/static/json/anagrams.json')
         .then((response) => response.json())
-        .then(data => {
-            const anagrams = data.anagrams
-            let array = function(arr) {
-                if ( typeof(arr) == "object") {
-                    for (var i = 0; i < arr.length; i++) {
-                        array(arr[i]);
-                    }
-                }
-                else document.write(arr);
-            }
-            
-            array(anagrams);
-        })
+        .then((data) => console.log(data))
     ;
-    
-    anagram5 = anagrams['5']
 
-    let anagram5 = this.anagram5[Math.floor(Math.random()*this.anagram5.length)];
-    anagram6 = this.anagram6[Math.floor(Math.random()*this.anagram6.length)];
-    anagram7 = this.anagram7[Math.floor(Math.random()*this.anagram7.length)];
-    anagram8 = this.anagram8[Math.floor(Math.random()*this.anagram8.length)];
+    const anagram5 = {anagram5: "anagram5"};
+    const anagram6 = {anagram6: "anagram6"};
+    const anagram7 = {anagram7: "anagram7"};
+    const anagram8 = {anagram8: "anagram8"};
 
-    let anagram;
-    const wordLength = (document.getElementById('wordlength'));
+    let rand5 = anagram5[(Math.floor(Math.random()*(anagram5.length)))];
+    let rand6 = anagram6[(Math.floor(Math.random()*(anagram6.length)))];
+    let rand7 = anagram7[(Math.floor(Math.random()*(anagram7.length)))];
+    let rand8 = anagram8[(Math.floor(Math.random()*(anagram8.length)))];
 
-    if (wordLength == 5) {
-        anagram = anagram5
-    } else if (wordLength == 6) {
+    if (wordLength == '5') {
+        anagram = rand5
+    } else if (wordLength == '6') {
         anagram = rand6
-    } else if (wordLength == 7) {
+    } else if (wordLength == '7') {
         anagram = rand7
     } else {
         anagram = rand8
     }
 
-    let word = anagram[Math.floor(Math.random()*anagram.length)];
+    let word = anagram[(Math.floor(Math.random()*(anagram.length)))];
     let count = anagram.length - 1;
 
     word = document.getElementById('word');
