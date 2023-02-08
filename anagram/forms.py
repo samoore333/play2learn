@@ -8,10 +8,8 @@ class AnagramgameForm(ModelForm):
         model = Anagramgame
         fields = ['word_length']
         widgets = {
-            'word_length': Select(
-                attrs={'autofocus': True, 
-                    'choices': [(5, 5), (6, 6), 
-                        (7, 7), (8, 8)]}
+            'word_length': NumberInput(
+                attrs={'min': 5, 'max': 8}
             )
         }
         help_texts = {

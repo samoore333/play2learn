@@ -1,4 +1,4 @@
-window.addEventListener('load', function math() {
+window.addEventListener('load', function () {
     let number1;
     let number2;
 
