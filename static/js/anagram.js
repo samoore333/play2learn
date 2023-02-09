@@ -157,9 +157,6 @@ window.addEventListener('load', function anagram() {
 
     wordLength = Number(document.getElementById('word_length').innerHTML);
 
-    let word = + this.document.getElementById('word').innerHTML;
-    let count = + this.document.getElementById('left').innerHTML;
-
     let anagram;
     
     if (wordLength == 5) {
@@ -172,37 +169,40 @@ window.addEventListener('load', function anagram() {
         anagram = rand8
     }
 
-    word = anagram[(Math.floor(Math.random()*(anagram.length)))];
-    count = anagram.length - 1;
-    const correct = anagram
+    const word = anagram[(Math.floor(Math.random()*(anagram.length)))];
+    const count = anagram.length - 1;
 
     document.getElementById('word').innerHTML=word;
     document.getElementById('left').innerHTML=count;
-    document.getElementById('answer').focus();
+    document.getElementById('answer').focus();;
 
 window.addEventListener("keydown", function(e) {
     if (e.key === 'Enter' || e.keycode === 13) {
     
-    let answer = document.getElementById('answer').innerHTML;
+    const answer = document.getElementById('answer');
+    const value = answer.value;
+    let correct = anagram;
+    const question = document.getElementById('word').innerHTML;
     let playerScore = + this.document.getElementById('playerScore').innerHTML;
-    list = document.getElementById('list');
-    list = []
+    const list = document.getElementById('list');
+    const newAnswer = document.createElement('li');
+    newAnswer.innerHTML = value;
+    let left = + this.document.getElementById('left').innerHTML;
     
-    if (correct.indexOf(answer) !== -1 && answer !== word) {
-        playerScore+=1;
+    if (correct.indexOf(value) != -1 && value != question) {
+        playerScore++;
         document.getElementById('playerScore').innerHTML=playerScore;
-        document.querySelector('input[type=text]').value = "";               
-        this.list.push(answer);
-        count+=1;
-    }
-    else if (correct.indexOf(answer) === -1 || answer === word) {
+        document.querySelector('input[type=text]').value = "";
+        list.appendChild(newAnswer);
+        left--;
+        document.getElementById('left').innerHTML=left;
+    } else {
         alert('You already got that word or this is not a valid anagram.')
         document.querySelector('input[type=text]').value = "";               
     }
-
-    if (count == 0) {
-        alert('You got all the anagrams for this word!')
-    }
+   
+    //if (count == 0) {
+    //alert('You got all the anagrams for this word!')
 
     let word = this.anagram[Math.floor(Math.random()*this.anagram.length)];
     let count = this.anagram.length - 1;
@@ -210,8 +210,6 @@ window.addEventListener("keydown", function(e) {
     document.getElementById('word').innerHTML=word;
     document.getElementById('left').innerHTML=count;
     document.getElementById('answer').focus();
-    document.getElementById('list').innerHTML=list;
-    list = []
     }
 });
 });
