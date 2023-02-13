@@ -74,6 +74,16 @@ class MathgameListView(LoginRequiredMixin, ListView):
             'score': 'score',
             'default_key': 'score'
         }
+    
+    def get_queryset(self):
+        ordering = self.get_ordering()
+        qs = Mathgame.objects.all()
+
+        if 'username' in self.kwargs:
+            username = self.kwargs['username']
+            qs = qs.filter(user__username=username)
+
+        return qs.order_by(ordering)
 
 class MathgameUpdateView(UpdateView):
     model = Mathgame

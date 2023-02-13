@@ -11,4 +11,5 @@ urlpatterns = [
     path('anagram/start/', AnagramgameCreateView.as_view(), name='start'),
     path('anagram/<slug>/', AnagramgameDetailView.as_view(), name='detail'),
     path('', AnagramgameListView.as_view(), name='leaders'),
+    path('creator/<username>/', AnagramgameListView.as_view(), name='creator'),
 ]
