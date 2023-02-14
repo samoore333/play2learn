@@ -63,15 +63,13 @@
             <div class="row justify-content-center">
               <div class="form-group">
                 <input class="btn btn-info pl-4 pr-4" type="button" value="0" onclick="input(this)" />
-                <input class="btn btn-info pl-2 pr-2" type="button" value="Clear" onclick="del();" />
-                <input class="btn btn-info pl-3 pr-3" type="submit" value="Enter"/>
+                <input class="btn btn-info pl-4 pr-4" type="button" value="Clear" onclick="del();" />
               </div>
             </div>
           {% endblock %}
             <div class="row justify-content-between">
               <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                {% csrf_token %}
-                <span id='playerScore'>0</span>
+                <span id='playerScore'>{{ mathgame.score }}</span>
               </p>
               </form>
               <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
@@ -94,10 +92,10 @@
             {% endblock %}
         </div>
       {% endif %}
+      {% if 'start' in request.path %}
       <form method="post" action="">
         {% csrf_token %}
         {{ form|crispy }}
-      {% if 'start' in request.path %}
           <button class="btn btn-info btn-block">Go</button>
       </form>
         <br>
