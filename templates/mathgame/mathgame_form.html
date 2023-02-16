@@ -65,32 +65,34 @@
                 <input class="btn btn-info pl-4 pr-4" type="button" value="0" onclick="input(this)" />
                 <input class="btn btn-info pl-4 pr-4" type="button" value="Clear" onclick="del();" />
               </div>
-            </div>
+          </div>
           {% endblock %}
-            <div class="row justify-content-between">
-              <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                <span id='playerScore'>{{ mathgame.score }}</span>
-              </p>
-              </form>
-              <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
-                <span id="playerTime">30</span>
-              </p>
-            </div>
-            {% block timer %}
-              <script>
-                let timeleft = 29;
-                let gameTimer = + this.setInterval(function(){
-                    if(timeleft <= 0){
-                      clearInterval(gameTimer);
-                      window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
-                    } else {
-                        document.getElementById("playerTime").innerHTML = timeleft;  
-                    }
-                    timeleft -= 1;
-                }, 1000);
-              </script>
-            {% endblock %}
-        </div>
+          <div class="row justify-content-between">
+            <form id='scoreForm'>
+                <p class="float-left font-weight-bold pl-3">Score:&nbsp;
+                  <span id='playerScore'>{{ mathgame.score }}</span>
+                </p>
+            </form>
+            <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
+              <span id="playerTime">30</span>
+            </p>
+          </div>
+          {% block timer %}
+            <script>
+              let timeleft = 29;
+              let gameTimer = + this.setInterval(function(){
+                  if(timeleft <= 0){
+                    document.getElementById('scoreForm').submit();
+                    clearInterval(gameTimer);
+                    window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
+                  } else {
+                      document.getElementById("playerTime").innerHTML = timeleft;  
+                  }
+                  timeleft -= 1;
+              }, 1000);
+            </script>
+          {% endblock %}
+          </div>
       {% endif %}
       {% if 'start' in request.path %}
       <form method="post" action="">

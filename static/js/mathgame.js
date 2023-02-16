@@ -50,7 +50,6 @@ window.addEventListener("keydown", function(e) {
     if (value == answer) {
           playerScore+=1;
           document.getElementById('playerScore').innerHTML=playerScore;
-          
     } else {
           alert('You are incorrect, the answer was ' + answer);
     }
