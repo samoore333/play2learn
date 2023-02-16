@@ -68,11 +68,9 @@
           </div>
           {% endblock %}
           <div class="row justify-content-between">
-            <form id='scoreForm'>
-                <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                  <span id='playerScore'>{{ mathgame.score }}</span>
-                </p>
-            </form>
+            <p class="float-left font-weight-bold pl-3">Score:&nbsp;
+              <span id='playerScore'>{{ mathgame.score }}</span>
+            </p>
             <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
               <span id="playerTime">30</span>
             </p>
@@ -82,7 +80,6 @@
               let timeleft = 29;
               let gameTimer = + this.setInterval(function(){
                   if(timeleft <= 0){
-                    document.getElementById('scoreForm').submit();
                     clearInterval(gameTimer);
                     window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
                   } else {

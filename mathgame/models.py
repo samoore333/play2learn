@@ -40,6 +40,10 @@ class Mathgame(models.Model):
 
         super().save(*args, **kwargs)
     
+    def scoreSave(self, *args, **kwargs):
+        if self.score < 0:
+            self.score = 0
+        super(Mathgame, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.operation
@@ -49,16 +53,3 @@ class Mathgame(models.Model):
     
     def __int__(self):
         return self.score
-
-class MathgameScore(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        related_name='mathgamescore'      
-    )
-    mathgame = models.ForeignKey(
-        Mathgame, on_delete=models.CASCADE,
-        related_name='mathgamescore'
-    )
-    scores = models.IntegerField(default=0)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)

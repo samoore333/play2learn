@@ -1,4 +1,3 @@
-from django import forms
 from django.forms import NumberInput, ModelForm, Select
 
 from .models import Mathgame
