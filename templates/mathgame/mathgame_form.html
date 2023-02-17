@@ -5,6 +5,7 @@
 
 {% block javascript %}
   <script src="{% static 'js/mathgame.js' %}"></script>
+  <script src="{% static 'js/score.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}
 {% block main %}
@@ -69,7 +70,7 @@
           {% endblock %}
           <div class="row justify-content-between">
             <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-              <span id='playerScore'>{{ mathgame.score }}</span>
+                <span id='playerScore'>{{ mathgame.score }}</span>
             </p>
             <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
               <span id="playerTime">30</span>
