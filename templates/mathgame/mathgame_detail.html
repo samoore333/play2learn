@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block javascript %}
-  <script>
-    const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
-  </script>
   <script src="{% static 'js/score.js' %}"></script>
 {% endblock %}
 {% block title %}Math Facts Practice{% endblock %}

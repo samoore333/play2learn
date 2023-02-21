@@ -51,5 +51,3 @@ class Mathgame(models.Model):
     def __int__(self):
         return self.max_number
     
-    def __int__(self):
-        return self.score
