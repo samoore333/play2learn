@@ -50,6 +50,13 @@ window.addEventListener("keydown", function(e) {
     if (value == answer) {
           playerScore++;
           document.getElementById('playerScore').innerHTML=playerScore;
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", ajaxURL, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.send(JSON.stringify({
+              score: playerScore
+          }));
+
     } else {
           alert('You are incorrect, the answer was ' + answer);
     }
@@ -82,4 +89,3 @@ window.addEventListener("keydown", function(e) {
     }
 });
 });
-

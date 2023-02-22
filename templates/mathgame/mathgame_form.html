@@ -27,6 +27,9 @@
           <p class="font-weight-bold text-center text-uppercase text-warning">How many problems can you solve in 30 seconds?</p>
       {% endif %}
       {% if 'play' in request.path %}
+      <script>
+        const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
+      </script>
         <div id="operation" class="card-header font-weight-bold text-center">
           {{ mathgame.get_operation_display }}</div>
         <p class="text-center">Max Number
@@ -82,17 +85,10 @@
               </div>
           </div>
           {% endblock %}
-          <form method="post" action="">
-            {% csrf_token %}
-            {{ form|crispy }}
-              <button class="btn btn-info btn-block">Go</button>
-            <br>
-          </form>
           <div class="row justify-content-between">
+            {% csrf_token %}
             <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                <form id='playerScore' method="post" action="submit">
-                  {% csrf_token %} {{ mathgame.score }}
-                </form>
+                <span id='playerScore'>{{ mathgame.score }}</span>
             </p>
             <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
               <span id="playerTime">30</span>
@@ -103,7 +99,6 @@
               let timeleft = 29;
               let gameTimer = + this.setInterval(function(){
                   if(timeleft <= 0){
-                    alert('Game over, press enter to record score')
                     clearInterval(gameTimer);
                     window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
                   } else {
