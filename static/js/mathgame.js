@@ -50,15 +50,16 @@ window.addEventListener("keydown", function(e) {
     if (value == answer) {
           playerScore++;
           document.getElementById('playerScore').innerHTML=playerScore;
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", ajaxURL, true);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.send(JSON.stringify({
-              score: playerScore
-          }));
+          const data = {'score': playerScore};
 
-    } else {
-          alert('You are incorrect, the answer was ' + answer);
+          fetch("", {
+          method: "POST",
+          headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrftoken}, 
+          body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          } else {
+                    alert('You are incorrect, the answer was ' + answer);
     }
 
     document.querySelector('input[type=text]').value = "";               
