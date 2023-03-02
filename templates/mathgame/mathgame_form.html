@@ -103,6 +103,20 @@
               let timeleft = 29;
               let gameTimer = + this.setInterval(function(){
                   if(timeleft <= 0){
+                    const playerScore = document.getElementById('playerScore');
+                    const score = playerScore.value;
+                    const data = {'score': score}
+                    const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
+                    fetch(ajaxURL, {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrftoken}, 
+                    body: JSON.stringify(data),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                      const score = data.score;
+                      document.getElementById('playerScore').innerHTML = data.score;
+                    })
                     clearInterval(gameTimer);
                     window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
                   } else {

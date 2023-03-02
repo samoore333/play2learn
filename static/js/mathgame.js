@@ -49,15 +49,7 @@ window.addEventListener("keydown", function(e) {
 
     if (value == answer) {
           playerScore++;
-          document.getElementById('playerScore').innerHTML=playerScore;
-          const data = {'score': playerScore};
-
-          fetch("", {
-          method: "POST",
-          headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrftoken}, 
-          body: JSON.stringify(data),
-          })
-          .then(response => response.json())
+          document.getElementById('playerScore').innerHTML=playerScore;        
           } else {
                     alert('You are incorrect, the answer was ' + answer);
     }
