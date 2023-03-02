@@ -91,12 +91,14 @@ class MathgameUpdateView(UpdateView):
     form_class = MathgamePlayForm
 
 def score(request, slug):
+    user = request.user
     mathgame = Mathgame.objects.get(slug=slug)
     data = json.loads(request.body)
 
     score = data['score']
 
-    mathgame_score = Mathgame(score=score)
+    mathgame_score = Mathgame.objects.get(user=user, slug=slug)
+    mathgame_score.score = score
     mathgame_score.save()
 
     response = {

@@ -91,7 +91,7 @@
                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
                 </script>
               <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-                  <span id='playerScore'>{{ mathgame.score }}</span>
+                  <span id='playerScore'>0</span>
               </p>
             </form>
             <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
@@ -103,9 +103,10 @@
               let timeleft = 29;
               let gameTimer = + this.setInterval(function(){
                   if(timeleft <= 0){
-                    const playerScore = document.getElementById('playerScore');
-                    const score = playerScore.value;
-                    const data = {'score': score}
+                    const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+                    const csrfToken = csrfInput.value;
+                    const score = Number(document.getElementById('playerScore').innerHTML);
+                    const data = {'score': score};
                     const ajaxURL = "{% url 'mathgame:ajax-score' mathgame.slug %}";
                     fetch(ajaxURL, {
                     method: "POST",
@@ -117,6 +118,7 @@
                       const score = data.score;
                       document.getElementById('playerScore').innerHTML = data.score;
                     })
+                    alert('Game Over!');
                     clearInterval(gameTimer);
                     window.location.href = "{% url 'mathgame:detail' mathgame.slug %}"
                   } else {
