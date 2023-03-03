@@ -166,18 +166,13 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATICFILES_STORAGE = 'play2learn_site.storage_backends.StaticStorage'
 DEFAULT_FILE_STORAGE = 'play2learn_site.storage_backends.PublicMediaStorage'
 PRIVATE_FILE_STORAGE = 'play2learn_site.storage_backends.PrivateMediaStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # BOTTOM OF settings.py
 if os.environ.get('ENVIRONMENT') != 'production':
