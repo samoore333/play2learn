@@ -2,7 +2,6 @@ import json
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.template import RequestContext
 from .models import Mathgame
 from .forms import MathgameForm, MathgamePlayForm
 

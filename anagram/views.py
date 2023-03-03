@@ -1,6 +1,8 @@
+import json
 from django.views.generic import ListView
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from .models import Anagramgame
 from .forms import AnagramgameForm, AnagramgamePlayForm
 
@@ -88,3 +90,19 @@ class AnagramgameListView(LoginRequiredMixin, ListView):
 class AnagramgameUpdateView(UpdateView):
     model = Anagramgame
     form_class = AnagramgamePlayForm
+
+def score(request, slug):
+    user = request.user
+    anagramgame = Anagramgame.objects.get(slug=slug)
+    data = json.loads(request.body)
+
+    score = data['score']
+
+    anagramgame_score = Anagramgame.objects.get(user=user, slug=slug)
+    anagramgame_score.score = score
+    anagramgame_score.save()
+
+    response = {
+        'score': score
+    }
+    return JsonResponse(response)

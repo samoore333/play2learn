@@ -11,15 +11,23 @@
     style="max-width: 30rem">
     <h1 class="text-center">Anagram Hunt</h1>
       {% if 'play' in request.path %}
+      <script>
+        const ajaxURL = "{% url 'anagram:ajax-score' anagramgame.slug %}";
+      </script>
         <p class="card-header font-weight-bold text-center">
           Word Length: 
           <span id='word_length'>{{ anagramgame.word_length }}</span>
         </p>
         <br>
         <div>
-          <p class="float-left font-weight-bold pl-3">Score:&nbsp;
-            <span id='playerScore'>{{ anagramgame.score }}</span>
-          </p>
+          <form method="post">{% csrf_token %}
+            <script>
+              const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            </script>
+            <p class="float-left font-weight-bold pl-3">Score:&nbsp;
+                <span id='playerScore'>0</span>
+            </p>
+          </form>
           <p class="float-right font-weight-bold pr-3">Time Left:&nbsp;
             <span id="playerTime">60</span>
           </p>
@@ -31,6 +39,22 @@
             let timeleft = 59;
             let gameTimer = + this.setInterval(function(){
                 if(timeleft <= 0){
+                  const csrfInput =  document.querySelector("input[name='csrfmiddlewaretoken']");
+                  const csrfToken = csrfInput.value;
+                  const score = Number(document.getElementById('playerScore').innerHTML);
+                  const data = {'score': score};
+                  const ajaxURL = "{% url 'anagram:ajax-score' anagramgame.slug %}";
+                  fetch(ajaxURL, {
+                  method: "POST",
+                  headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrftoken}, 
+                  body: JSON.stringify(data),
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                    const score = data.score;
+                    document.getElementById('playerScore').innerHTML = data.score;
+                  })
+                  alert('Game Over!');
                   clearInterval(gameTimer);
                   window.location.href = "{% url 'anagram:detail' anagramgame.slug %}"
                 } else {
