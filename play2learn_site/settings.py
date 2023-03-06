@@ -175,6 +175,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
 # BOTTOM OF settings.py
 if os.environ.get('ENVIRONMENT') != 'production':
     from .local_settings import *
