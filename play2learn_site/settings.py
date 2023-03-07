@@ -171,9 +171,8 @@ PRIVATE_FILE_STORAGE = 'play2learn_site.storage_backends.PrivateMediaStorage'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles'), ]
 
 # BOTTOM OF settings.py
 if os.environ.get('ENVIRONMENT') != 'production':
