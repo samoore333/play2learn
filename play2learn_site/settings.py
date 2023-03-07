@@ -159,7 +159,6 @@ AWS_STORAGE_BUCKET_NAME = 'heroku-play2learn-app-smoore' # REPLACE WITH YOUR BUC
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_DEFAULT_ACL = None # Use S3 bucket's setting
-AWS_S3_REGION_NAME = 'us-west-2' 
 
 
 AWS_S3_OBJECT_PARAMETERS = {
